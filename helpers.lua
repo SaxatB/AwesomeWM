@@ -7,6 +7,7 @@ local beautiful = require("beautiful")
 local lgi = require("lgi")
 local Gio = lgi.Gio
 local Gtk = lgi.require("Gtk", "3.0")
+local capi = { mouse = mouse }
 
 local M = {}
 
@@ -88,6 +89,25 @@ function M.add_tooltip(widget, markup)
   })
 end
 
+-- Helpers for Exit Screen
+function M.add_hover_cursor(w, hover_cursor)
+	local original_cursor = "left_ptr"
+
+	w:connect_signal("mouse::enter", function()
+		local widget = capi.mouse.current_wibox
+		if widget then
+			widget.cursor = hover_cursor
+		end
+	end)
+
+	w:connect_signal("mouse::leave", function()
+		local widget = capi.mouse.current_wibox
+		if widget then
+			widget.cursor = original_cursor
+		end
+	end)
+end
+
 -- Adds margin to widget
 function M.add_margin(widget, h, v)
   h = h or beautiful.margin[0]
@@ -124,6 +144,52 @@ function M.get_gicon_path(gicon)
   if info then
     return info:get_filename()
   end
+end
+
+--- Run Functions
+local tostring = tostring
+local string = string
+local ipairs = ipairs
+local math = math
+local os = os
+
+function M.run_once_pgrep(cmd)
+	local findme = cmd
+	local firstspace = cmd:find(" ")
+	if firstspace then
+		findme = cmd:sub(0, firstspace - 1)
+	end
+	awful.spawn.easy_async_with_shell(string.format("pgrep -u $USER -x %s > /dev/null || (%s)", findme, cmd))
+end
+
+function M.run_once_ps(findme, cmd)
+	awful.spawn.easy_async_with_shell(string.format("ps -C %s|wc -l", findme), function(stdout)
+		if tonumber(stdout) ~= 2 then
+			awful.spawn(cmd, false)
+		end
+	end)
+end
+
+function M.run_once_grep(command)
+	awful.spawn.easy_async_with_shell(string.format("ps aux | grep '%s' | grep -v 'grep'", command), function(stdout)
+		if stdout == "" or stdout == nil then
+			awful.spawn(command, false)
+		end
+	end)
+end
+
+function M.check_if_running(command, running_callback, not_running_callback)
+	awful.spawn.easy_async_with_shell(string.format("ps aux | grep '%s' | grep -v 'grep'", command), function(stdout)
+		if stdout == "" or stdout == nil then
+			if not_running_callback ~= nil then
+				not_running_callback()
+			end
+		else
+			if running_callback ~= nil then
+				running_callback()
+			end
+		end
+	end)
 end
 
 return M

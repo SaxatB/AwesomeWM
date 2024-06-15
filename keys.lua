@@ -14,18 +14,25 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey }, "Return", function()
         awful.spawn(apps.terminal)
     end, { description = "open a terminal", group = "launcher" }),
-    awful.key({ modkey }, "p", function()
+    awful.key({ modkey }, "r", function()
         awesome.emit_signal("launcher::toggle")
     end, { description = "show the menubar", group = "launcher" }),
     awful.key({ modkey, "Shift" }, "s", function()
         awful.spawn.with_shell("sh " .. gears.filesystem.get_configuration_dir() .. "screenshot area")
     end, { description = "screenshot selection", group = "launcher" }),
+    awful.key({ modkey, "Shift" }, "x", function()
+        awful.spawn.with_shell("sh " .. gears.filesystem.get_configuration_dir() .. "color-picker")
+    end, { description = "Color Picker", group = "launcher" }),
     awful.key({}, "Print", function()
         awful.spawn.with_shell("sh " .. gears.filesystem.get_configuration_dir() .. "screenshot full")
     end, { description = "screenshot screen", group = "launcher" }),
     awful.key({ "Mod1", "Shift" }, "x", function()
         awesome.emit_signal("lockscreen::toggle")
     end, { description = "lock screen", group = "launcher" }),
+    awful.key({ modkey }, "Escape", function()
+        awesome.emit_signal("exitscreen::toggle")
+    end, { description = "Exit screen", group = "launcher" }),
+
     awful.key({
         modifiers = {},
         key = "XF86MonBrightnessUp",
@@ -246,7 +253,7 @@ client.connect_signal("request::default_keybindings", function()
             c:kill()
         end, { description = "close", group = "client" }),
         awful.key(
-            { modkey, "Shift" },
+            { modkey, "Control" },
             "space",
             awful.client.floating.toggle,
             { description = "toggle floating", group = "client" }

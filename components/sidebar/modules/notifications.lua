@@ -18,7 +18,6 @@ function M.new()
     M.erase = helpers.add_bg1(M.erase_icon)
     M.erase.fg = beautiful.blue
 
-    M.tooltip = helpers.add_tooltip(M.erase, "<b>Clear All</b>")
 
     M.notifications = wibox.widget({
         spacing = beautiful.margin[0],

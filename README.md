@@ -4,7 +4,8 @@
 #### Features
 - Tab Switcher (Alt+Tab)
 - Lock Screen (Shift+Alt+x)
-- Sidebar/App Launcher (Super+p)
+- Exit Screen (Super+Esc)
+- Sidebar/App Launcher (Super+r)
 
 #### Requirements
 - [Material Design Iconic Font](https://zavoloklom.github.io/material-design-iconic-font/)
@@ -15,6 +16,9 @@
 - NetworkManager (Wifi)
 - pamixer & pactl (Audio)
 - UPower (Battery)
+- Gpick (Color Picker)
+- Maim (Screenshot)
+- xss-lock (auto screen lock)
 
 #### Post-Installation
 - Add your own background in `backgrounds/` and change in `themes.lua`

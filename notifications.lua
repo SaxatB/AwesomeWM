@@ -203,8 +203,8 @@ naughty.connect_signal("request::display", function(n)
     notification = n,
     type = "notification",
     shape = helpers.rrect(),
-    minimum_width = beautiful.dpi(400),
-    maximum_width = beautiful.dpi(400),
+    minimum_width = beautiful.dpi(350),
+    maximum_width = beautiful.dpi(350),
     maximum_height = beautiful.dpi(150),
     widget_template = {
       title_bar,

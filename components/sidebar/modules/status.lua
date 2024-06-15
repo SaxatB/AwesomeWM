@@ -43,9 +43,7 @@ function M.create_status_widget(icon, color, hover_text)
     })))
     widget.fg = color
 
-    local tooltip = helpers.add_tooltip(widget, hover_text)
-
-    return { widget = widget, icon = icon_widget, text = text, progressbar = progressbar, tooltip = tooltip }
+    return { widget = widget, icon = icon_widget, text = text, progressbar = progressbar }
 end
 
 function M.new()
@@ -68,7 +66,6 @@ function M.new()
         if d.state == 1 or d.state == 4 then
             battery.icon.markup = ""
         end
-        battery.tooltip.markup = "<b>Battery</b>: " .. tostring(percentage) .. "%"
         battery.text.markup = tostring(percentage) .. "%"
         battery.progressbar.value = percentage
     end)
@@ -76,7 +73,6 @@ function M.new()
     local volume = M.create_status_widget("", beautiful.green, "Volume")
     awesome.connect_signal("volume::update", function(mute, vol)
         if mute then
-            volume.tooltip.markup = "<b>Muted</b>"
             volume.icon.markup = ""
             volume.widget.fg = beautiful.red
             volume.progressbar.colors[1] = beautiful.red
@@ -102,12 +98,8 @@ function M.new()
         end
         volume.text.markup = tostring(vol).."%"
         volume.progressbar.value = vol
-        volume.tooltip.markup = "<b>Volume</b>: " .. tostring(vol) .. "%"
     end)
     volume.widget:buttons({
-        awful.button({}, 1, function()
-            awful.spawn.with_shell(config.apps.volume_manager)
-        end),
         awful.button({}, 2, function()
             awesome.emit_signal("volume::mute")
         end),
@@ -136,7 +128,6 @@ function M.new()
         end
         brightness.text.markup = tostring(value).."%"
         brightness.progressbar.value = value
-        brightness.tooltip.markup = "<b>Brightness</b>: "..tostring(value).."%"
     end)
     brightness.widget:buttons({
         awful.button({}, 4, function()
@@ -146,8 +137,7 @@ function M.new()
             awesome.emit_signal("brightness::decrease", 5)
         end)
     })
-
-    local cpu = M.create_status_widget("", beautiful.green, "CPU")
+    local cpu = M.create_status_widget("", beautiful.green, "CPU")
     awesome.connect_signal("cpu::update", function(value)
         if value < 25 then
             cpu.widget.fg = beautiful.green
@@ -164,10 +154,8 @@ function M.new()
         end
         cpu.text.markup = tostring(value).."%"
         cpu.progressbar.value = value
-        cpu.tooltip.markup = "<b>CPU</b>: "..tostring(value).."%"
     end)
-
-    local memory = M.create_status_widget("", beautiful.green, "Memory")
+    local memory = M.create_status_widget("", beautiful.green, "Memory")
     awesome.connect_signal("memory::update", function(value)
         if value < 25 then
             memory.widget.fg = beautiful.green
@@ -184,7 +172,6 @@ function M.new()
         end
         memory.text.markup = tostring(value).."%"
         memory.progressbar.value = value
-        memory.tooltip.markup = "<b>Memory</b>: "..tostring(value).."%"
     end)
 
     M.widget = helpers.add_margin(wibox.widget({

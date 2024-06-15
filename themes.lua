@@ -3,13 +3,13 @@ local gears = require("gears")
 local dpi = beautiful.xresources.apply_dpi
 local helpers = require("helpers")
 
-awesome.set_preferred_icon_size(64)
+awesome.set_preferred_icon_size(48)
 
 local M = {}
 
 M.themes_path = gears.filesystem.get_configuration_dir()
 
-M.wallpaper = M.themes_path .. "backgrounds/mountains_1.jpg"
+M.wallpaper = M.themes_path .. "backgrounds/ww.jpg"
 screen.connect_signal("request::desktop_decoration", function(s)
     gears.wallpaper.maximized(M.wallpaper, s)
 end)
@@ -119,6 +119,14 @@ M.layout_cornerne = M.themes_path .. "layouts/cornernew.png"
 M.layout_cornersw = M.themes_path .. "layouts/cornersww.png"
 M.layout_cornerse = M.themes_path .. "layouts/cornersew.png"
 
+-- Exitscreen icons
+M.icon_power = M.themes_path .. "assets/exit_scr/poweroff.svg"
+M.icon_reboot = M.themes_path .. "assets/exit_scr/reboot.svg"
+M.icon_lock = M.themes_path .. "assets/exit_scr/lock.svg"
+M.icon_suspend = M.themes_path .. "assets/exit_scr/suspend.svg"
+M.icon_exit = M.themes_path .. "assets/exit_scr/exit.svg"
+
+M.systray_icon_spacing = 7
 beautiful.init(M)
 
 return M

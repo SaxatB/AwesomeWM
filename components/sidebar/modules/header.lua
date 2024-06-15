@@ -6,30 +6,12 @@ local helpers = require("helpers")
 local M = {}
 
 M.buttons = {
-    {
-        icon = "",
-        cmd = "systemctl poweroff",
-        text = "Shutdown",
-        color = beautiful.red,
-    },
-    {
-        icon = "",
-        cmd = "systemctl reboot",
-        text = "Restart",
-        color = beautiful.orange,
-    },
-    {
-        icon = "",
-        cmd = "awesome-client 'awesome.emit_signal(\"lockscreen::toggle\")'",
-        text = "Lock",
-        color = beautiful.green,
-    },
-    {
+   {
         icon = "",
-        cmd = "awesome-client 'awesome.quit()'",
+        cmd = "awesome-client 'awesome.emit_signal(\"exitscreen::toggle\")'",
         text = "Exit",
         color = beautiful.blue,
-    }
+   }
 }
 
 function M.create_button(icon, cmd, text, color)
@@ -82,7 +64,7 @@ function M.new()
     })
 
     M.uptime = helpers.add_bg0(M.uptime_text)
-    M.uptime.fg = beautiful.bg2
+    M.uptime.fg = beautiful.fg2
 
     M.name = wibox.widget({
         markup = "",

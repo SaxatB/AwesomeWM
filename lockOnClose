@@ -1,0 +1,4 @@
+#!/bin/bash
+
+awesome-client 'awesome.emit_signal("lockscreen::toggle")'
+exit

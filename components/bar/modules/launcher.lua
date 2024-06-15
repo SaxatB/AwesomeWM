@@ -14,8 +14,6 @@ local function create_widget()
   helpers.add_click(helpers.add_margin(image, beautiful.margin[1], beautiful.margin[1])), beautiful.margin[0],
     beautiful.margin[0])
 
-  local tooltip = helpers.add_tooltip(widget, "<b>Launch</b>")
-
   widget:buttons({
     awful.button({}, 1, function()
       awesome.emit_signal("launcher::toggle")

@@ -21,7 +21,7 @@ local function create_widget(s)
 		},
 	})
 
-	local widget = helpers.add_margin(helpers.add_click(helpers.add_margin(layout_box)))
+	local widget = helpers.add_margin(helpers.add_margin(layout_box))
 	return widget
 end
 return create_widget
