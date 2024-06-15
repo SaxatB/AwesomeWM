@@ -1,5 +1,6 @@
 ## AwesomeWM Config
 ![Preview](./preview.png)
+![Exit Screen](./exitscreen.jpg)
 
 #### Features
 - Tab Switcher (Alt+Tab)
