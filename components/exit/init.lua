@@ -36,12 +36,13 @@ end
 -- Goodbye text
 M.username = os.getenv("USER")
 M.goodbye_widget = wibox.widget.textbox("[ Goodbye " .. M.username:sub(1,1):upper()..M.username:sub(2) .. " ]")
+M.goodbye_widget.font = "RobotoCondensed 26"
 text_font = beautiful.font or "sans 20"
 
 -- Buttons and Text
 -- Separator
 M.sep = wibox.widget({
-	forced_height = dpi(20),
+	forced_height = dpi(40),
 	opacity = 0,
 	widget = wibox.widget.separator(),
 })
