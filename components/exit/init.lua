@@ -56,7 +56,7 @@ local power_icon = wibox.widget({
 	halign = "center",
 	valign = "center",
 	opacity = 1.0,
-	forced_height = dpi(90),
+	forced_height = dpi(65),
 	forced_width = dpi(140),
 	widget = wibox.widget.imagebox
 })
@@ -93,7 +93,7 @@ local exit_icon = wibox.widget({
 	halign = "center",
 	valign = "center",
 	opacity = 1.0,
-	forced_height = dpi(90),
+	forced_height = dpi(65),
 	forced_width = dpi(140),
 	widget = wibox.widget.imagebox
 })
@@ -130,7 +130,7 @@ local suspend_icon = wibox.widget({
 	halign = "center",
 	valign = "center",
 	opacity = 1.0,
-	forced_height = dpi(90),
+	forced_height = dpi(65),
 	forced_width = dpi(140),
 	widget = wibox.widget.imagebox
 })
@@ -167,7 +167,7 @@ local reboot_icon = wibox.widget({
 	halign = "center",
 	valign = "center",
 	opacity = 1.0,
-	forced_height = dpi(90),
+	forced_height = dpi(65),
 	forced_width = dpi(140),
 	widget = wibox.widget.imagebox
 })
@@ -204,7 +204,7 @@ local lock_icon = wibox.widget({
 	halign = "center",
 	valign = "center",
 	opacity = 1.0,
-	forced_height = dpi(90),
+	forced_height = dpi(65),
 	forced_width = dpi(140),
 	widget = wibox.widget.imagebox
 })
