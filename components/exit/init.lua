@@ -39,6 +39,12 @@ M.goodbye_widget = wibox.widget.textbox("[ Goodbye " .. M.username:sub(1,1):uppe
 text_font = beautiful.font or "sans 20"
 
 -- Buttons and Text
+-- Separator
+M.sep = wibox.widget({
+	forced_height = dpi(20),
+	opacity = 0,
+	widget = wibox.widget.separator(),
+})
 -- Poweroff
 poweroff_text = wibox.widget.textbox("[P]oweroff")
 poweroff_text.font = text_font
@@ -50,7 +56,7 @@ local power_icon = wibox.widget({
 	halign = "center",
 	valign = "center",
 	opacity = 1.0,
-	forced_height = dpi(100),
+	forced_height = dpi(90),
 	forced_width = dpi(140),
 	widget = wibox.widget.imagebox
 })
@@ -68,7 +74,7 @@ local power_widget = wibox.widget({
         expand = "none",
         layout = wibox.layout.align.horizontal
     },
-    -- forced_width = 100,
+    spacing = dpi(10),
     layout = wibox.layout.fixed.vertical
 })
 
@@ -87,7 +93,7 @@ local exit_icon = wibox.widget({
 	halign = "center",
 	valign = "center",
 	opacity = 1.0,
-	forced_height = dpi(100),
+	forced_height = dpi(90),
 	forced_width = dpi(140),
 	widget = wibox.widget.imagebox
 })
@@ -105,7 +111,7 @@ local exit_widget = wibox.widget({
         expand = "none",
         layout = wibox.layout.align.horizontal
     },
-    -- forced_width = 100,
+    spacing = dpi(10),
     layout = wibox.layout.fixed.vertical
 })
 
@@ -124,7 +130,7 @@ local suspend_icon = wibox.widget({
 	halign = "center",
 	valign = "center",
 	opacity = 1.0,
-	forced_height = dpi(100),
+	forced_height = dpi(90),
 	forced_width = dpi(140),
 	widget = wibox.widget.imagebox
 })
@@ -142,7 +148,7 @@ local suspend_widget = wibox.widget({
         expand = "none",
         layout = wibox.layout.align.horizontal
     },
-    -- forced_width = 100,
+    spacing = dpi(10),
     layout = wibox.layout.fixed.vertical
 })
 
@@ -161,7 +167,7 @@ local reboot_icon = wibox.widget({
 	halign = "center",
 	valign = "center",
 	opacity = 1.0,
-	forced_height = dpi(100),
+	forced_height = dpi(90),
 	forced_width = dpi(140),
 	widget = wibox.widget.imagebox
 })
@@ -179,7 +185,7 @@ local reboot_widget = wibox.widget({
         expand = "none",
         layout = wibox.layout.align.horizontal
     },
-    -- forced_width = 100,
+    spacing = dpi(10),
     layout = wibox.layout.fixed.vertical
 })
 
@@ -198,7 +204,7 @@ local lock_icon = wibox.widget({
 	halign = "center",
 	valign = "center",
 	opacity = 1.0,
-	forced_height = dpi(100),
+	forced_height = dpi(90),
 	forced_width = dpi(140),
 	widget = wibox.widget.imagebox
 })
@@ -216,7 +222,7 @@ local lock_widget = wibox.widget({
         expand = "none",
         layout = wibox.layout.align.horizontal
     },
-    -- forced_width = 100,
+    spacing = dpi(10),
     layout = wibox.layout.fixed.vertical
 })
 
@@ -275,11 +281,6 @@ M.background = wibox.widget({
         widget = wibox.widget.imagebox
 })
 
-M.sep = wibox.widget({
-	forced_height = dpi(18),
-	opacity = 0,
-	widget = wibox.widget.separator(),
-})
 
     M.widget = wibox.widget({
     M.background,
