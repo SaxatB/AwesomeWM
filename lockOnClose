@@ -5,7 +5,7 @@ local awful = require("awful")
 local gears = require("gears")
 local capi = { root = root }
 gears.timer {
-        timeout   = 0.1,
+        timeout   = 0,
         autostart = true,
         single_shot = true,
         callback  = function()
