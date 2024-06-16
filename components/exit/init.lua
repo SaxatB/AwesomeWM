@@ -2,7 +2,6 @@ local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
 local helpers = require("helpers")
 
 local M = {}
@@ -42,7 +41,7 @@ text_font = beautiful.font or "sans 20"
 -- Buttons and Text
 -- Separator
 M.sep = wibox.widget({
-	forced_height = dpi(40),
+	forced_height = beautiful.dpi(40),
 	opacity = 0,
 	widget = wibox.widget.separator(),
 })
@@ -57,8 +56,8 @@ local power_icon = wibox.widget({
 	halign = "center",
 	valign = "center",
 	opacity = 1.0,
-	forced_height = dpi(65),
-	forced_width = dpi(140),
+	forced_height = beautiful.dpi(65),
+	forced_width = beautiful.dpi(140),
 	widget = wibox.widget.imagebox
 })
 
@@ -75,7 +74,7 @@ local power_widget = wibox.widget({
         expand = "none",
         layout = wibox.layout.align.horizontal
     },
-    spacing = dpi(10),
+    spacing = beautiful.dpi(10),
     layout = wibox.layout.fixed.vertical
 })
 
@@ -94,8 +93,8 @@ local exit_icon = wibox.widget({
 	halign = "center",
 	valign = "center",
 	opacity = 1.0,
-	forced_height = dpi(65),
-	forced_width = dpi(140),
+	forced_height = beautiful.dpi(65),
+	forced_width = beautiful.dpi(140),
 	widget = wibox.widget.imagebox
 })
 
@@ -112,7 +111,7 @@ local exit_widget = wibox.widget({
         expand = "none",
         layout = wibox.layout.align.horizontal
     },
-    spacing = dpi(10),
+    spacing = beautiful.dpi(10),
     layout = wibox.layout.fixed.vertical
 })
 
@@ -131,8 +130,8 @@ local suspend_icon = wibox.widget({
 	halign = "center",
 	valign = "center",
 	opacity = 1.0,
-	forced_height = dpi(65),
-	forced_width = dpi(140),
+	forced_height = beautiful.dpi(65),
+	forced_width = beautiful.dpi(140),
 	widget = wibox.widget.imagebox
 })
 
@@ -149,7 +148,7 @@ local suspend_widget = wibox.widget({
         expand = "none",
         layout = wibox.layout.align.horizontal
     },
-    spacing = dpi(10),
+    spacing = beautiful.dpi(10),
     layout = wibox.layout.fixed.vertical
 })
 
@@ -168,8 +167,8 @@ local reboot_icon = wibox.widget({
 	halign = "center",
 	valign = "center",
 	opacity = 1.0,
-	forced_height = dpi(65),
-	forced_width = dpi(140),
+	forced_height = beautiful.dpi(65),
+	forced_width = beautiful.dpi(140),
 	widget = wibox.widget.imagebox
 })
 
@@ -186,7 +185,7 @@ local reboot_widget = wibox.widget({
         expand = "none",
         layout = wibox.layout.align.horizontal
     },
-    spacing = dpi(10),
+    spacing = beautiful.dpi(10),
     layout = wibox.layout.fixed.vertical
 })
 
@@ -205,8 +204,8 @@ local lock_icon = wibox.widget({
 	halign = "center",
 	valign = "center",
 	opacity = 1.0,
-	forced_height = dpi(65),
-	forced_width = dpi(140),
+	forced_height = beautiful.dpi(65),
+	forced_width = beautiful.dpi(140),
 	widget = wibox.widget.imagebox
 })
 
@@ -223,7 +222,7 @@ local lock_widget = wibox.widget({
         expand = "none",
         layout = wibox.layout.align.horizontal
     },
-    spacing = dpi(10),
+    spacing = beautiful.dpi(10),
     layout = wibox.layout.fixed.vertical
 })
 
@@ -304,7 +303,7 @@ M.background = wibox.widget({
 		lock_widget,
 		suspend_widget,
 		exit_widget,
-                spacing = dpi(60),
+                spacing = beautiful.dpi(60),
                 layout = wibox.layout.fixed.horizontal
             },
             nil,
