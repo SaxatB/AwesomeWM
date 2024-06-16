@@ -9,13 +9,13 @@ local M = {}
 M.visible = false
 -- Commands
 function M.poweroff()
-	awful.spawn.with_shell("systemctl poweroff -i")
 	awesome.emit_signal("exitscreen::toggle")
+	awful.spawn.with_shell("systemctl poweroff -i")
 end
 
 function M.reboot()
-	awful.spawn.with_shell("systemctl reboot -i")
 	awesome.emit_signal("exitscreen::toggle")
+	awful.spawn.with_shell("systemctl reboot -i")
 end
 
 function M.suspend()
@@ -30,7 +30,7 @@ end
 
 function M.lock()
 	awesome.emit_signal("exitscreen::toggle")
-	awful.spawn.with_shell("loginctl lock-session")
+	awesome.emit_signal("lockscreen::toggle")
 end
 
 -- Goodbye text

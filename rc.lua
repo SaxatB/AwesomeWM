@@ -41,7 +41,6 @@ helpers.run_once_pgrep("copyq")
 	--- Other stuff
 -- helpers.run_once_grep("blueman-applet")
 -- helpers.run_once_grep("nm-applet")
-helpers.run_once_grep("xss-lock -- " .. gfs.get_configuration_dir() .. "lockOnClose")
 helpers.run_once_grep("numlockx")
 
 -- Mem Clean
