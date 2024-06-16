@@ -2,6 +2,7 @@ local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
+local rubato = require("rubato")
 
 local header = require("components.sidebar.modules.header")
 local launcher = require("components.sidebar.modules.launcher")
@@ -65,13 +66,21 @@ function M.new()
     ontop = true,
     visible = false,
     width = beautiful.dpi(600),
+    x = beautiful.dpi(-600),
     height = awful.screen.focused().geometry.height - 4 * beautiful.useless_gap,
-    border_color = beautiful.border_color_active,
-    border_width = beautiful.border_width,
   })
 
   awesome.connect_signal("launcher::toggle", function()
     M.toggle()
+    local timed = rubato.timed {
+		duration = 1 / 6,
+		intro = 1 / 15,
+		override_dt = true,
+		subscribed = function(pos)
+			M.wibox.x = pos - beautiful.dpi(575)
+		end
+	}
+  timed.target = 600
   end)
 
   awesome.connect_signal("launcher::stop", function()
