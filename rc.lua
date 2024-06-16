@@ -42,10 +42,12 @@ helpers.run_once_pgrep("copyq")
 -- helpers.run_once_grep("blueman-applet")
 -- helpers.run_once_grep("nm-applet")
 helpers.run_once_grep("xss-lock -- " .. gfs.get_configuration_dir() .. "lockOnClose")
+helpers.run_once_grep("numlockx")
 
 -- Mem Clean
 local collectgarbage = collectgarbage
 collectgarbage("incremental", 110, 1000)
+pcall(require, "luarocks.loader")
 
 local memory_last_check_count = collectgarbage("count")
 local memory_last_run_time = os.time()
@@ -53,9 +55,9 @@ local memory_growth_factor = 1.1 -- 10% over last
 local memory_long_collection_time = 300 -- five minutes in seconds
 
 local gtimer = require("gears.timer")
-gtimer.start_new(5, function()
+gtimer.start_new(30, function()
 	local cur_memory = collectgarbage("count")
-	-- instead of forcing a garbage collection every 5 seconds
+	-- instead of forcing a garbage collection every 30 seconds
 	-- check to see if memory has grown enough since we last ran
 	-- or if we have waited a sificiently long time
 	local elapsed = os.time() - memory_last_run_time

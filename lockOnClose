@@ -1,4 +1,16 @@
 #!/bin/bash
-
-awesome-client 'awesome.emit_signal("lockscreen::toggle")'
+awesome-client 'awesome.emit_signal("lockscreen::toggle")
+-- Silly Bug Fix
+local awful = require("awful")
+local gears = require("gears")
+local capi = { root = root }
+gears.timer {
+        timeout   = 0.1,
+        autostart = true,
+        single_shot = true,
+        callback  = function()
+            capi.root.fake_input("key_press", 22)  -- 22 is the keycode for BackSpace
+            capi.root.fake_input("key_release", 22)
+        end
+    }'
 exit

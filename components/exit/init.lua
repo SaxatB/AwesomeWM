@@ -211,7 +211,7 @@ local lock_icon = wibox.widget({
 })
 
 local lock_widget = wibox.widget({
-	{
+    {
         nil,
         lock_icon,
         expand = "none",
@@ -277,7 +277,7 @@ M.background = wibox.widget({
         vertical_fit_policy = true,
         horizontal_fit_policy = true,
         resize = true,
-        opacity = 0.5,
+        opacity = 0.25,
         clip_shape = helpers.rrect(),
         widget = wibox.widget.imagebox
 })
