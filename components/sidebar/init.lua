@@ -66,21 +66,22 @@ function M.new()
     ontop = true,
     visible = false,
     width = beautiful.dpi(600),
-    x = beautiful.dpi(-600),
+    x = beautiful.dpi(0),
     height = awful.screen.focused().geometry.height - 4 * beautiful.useless_gap,
   })
 
   awesome.connect_signal("launcher::toggle", function()
     M.toggle()
-    local timed = rubato.timed {
-		duration = 1 / 6,
-		intro = 1 / 15,
-		override_dt = true,
-		subscribed = function(pos)
-			M.wibox.x = pos - beautiful.dpi(575)
-		end
+    timed = rubato.timed {
+	duration = 0.35,
+	outro = 0.3,
+	intro = 0,
+	override_dt = true,
+	subscribed = function(pos)
+		M.wibox.x = pos
+	end
 	}
-  timed.target = 600
+  timed.target = beautiful.bar_width + 2 * beautiful.useless_gap
   end)
 
   awesome.connect_signal("launcher::stop", function()
