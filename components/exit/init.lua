@@ -47,7 +47,7 @@ M.sep = wibox.widget({
 	widget = wibox.widget.separator(),
 })
 -- Poweroff
-poweroff_text = wibox.widget.textbox("[P]oweroff")
+poweroff_text = wibox.widget.textbox("Poweroff")
 poweroff_text.font = text_font
 
 local power_icon = wibox.widget({
@@ -84,7 +84,7 @@ power_widget:connect_signal("button::press", M.poweroff)
 helpers.add_hover_cursor(power_widget, "hand1")
 
 -- Exit
-exit_text = wibox.widget.textbox("[E]xit")
+exit_text = wibox.widget.textbox("Exit")
 exit_text.font = text_font
 
 local exit_icon = wibox.widget({
@@ -121,7 +121,7 @@ exit_widget:connect_signal("button::press", M.exit)
 helpers.add_hover_cursor(exit_widget, "hand1")
 
 -- Suspend 
-suspend_text = wibox.widget.textbox("[S]uspend")
+suspend_text = wibox.widget.textbox("Suspend")
 suspend_text.font = text_font
 
 local suspend_icon = wibox.widget({
@@ -158,7 +158,7 @@ suspend_widget:connect_signal("button::press", M.suspend)
 helpers.add_hover_cursor(suspend_widget, "hand1")
 
 -- Reboot 
-reboot_text = wibox.widget.textbox("[R]eboot")
+reboot_text = wibox.widget.textbox("Reboot")
 reboot_text.font = text_font
 
 local reboot_icon = wibox.widget({
@@ -195,7 +195,7 @@ reboot_widget:connect_signal("button::press", M.reboot)
 helpers.add_hover_cursor(reboot_widget, "hand1")
 
 -- Lock 
-lock_text = wibox.widget.textbox("[L]ock")
+lock_text = wibox.widget.textbox("Lock")
 lock_text.font = text_font
 
 local lock_icon = wibox.widget({
