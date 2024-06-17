@@ -32,6 +32,7 @@ local function create_bar(s)
             require("components.bar.modules.systray")(),
             require("components.bar.modules.volume")(),
             require("components.bar.modules.wifi")(),
+	    require("components.bar.modules.battery")(),
             require("components.bar.modules.clock")(),
             require("components.bar.modules.layout")(),
             spacing = beautiful.margin[1],
