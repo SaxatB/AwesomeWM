@@ -8,6 +8,7 @@ local taglist_buttons = gears.table.join(awful.button({}, 1, function(t)
         t:view_only()
     end),
     awful.button({}, 4, function(t)
+
         awful.tag.viewnext(t.screen)
     end),
     awful.button({}, 5, function(t)
@@ -62,7 +63,7 @@ local function create_widget(s)
                 valign = "center",
                 halign = "center",
                 id = "icon"
-            },
+           },
             layout = wibox.container.background,
             id = "background_role",
             create_callback = update_tag,

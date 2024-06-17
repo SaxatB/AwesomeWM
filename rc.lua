@@ -42,6 +42,7 @@ helpers.run_once_pgrep("copyq")
 -- helpers.run_once_grep("blueman-applet")
 -- helpers.run_once_grep("nm-applet")
 helpers.run_once_grep("numlockx")
+helpers.run_once_grep("xss-lock -- " .. gfs.get_configuration_dir() .. "autolock")
 
 -- Mem Clean
 local collectgarbage = collectgarbage

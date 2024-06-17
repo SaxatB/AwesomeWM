@@ -31,16 +31,16 @@ function M.create_wiboxes()
 end
 
 function M.toggle()
-    M.visible = not M.visible
-    if M.visible then
+    if not M.visible then
         M.keygrabber:start()
         M.create_wiboxes()
-    else
-        M.input = ""
-        for _, widget in pairs(M.wiboxes) do
-            widget.visible = false
-        end
-        M.keygrabber:stop()
+	M.visible = true
+--    else
+--        M.input = ""
+--        for _, widget in pairs(M.wiboxes) do
+--            widget.visible = false
+--        end
+--        M.keygrabber:stop()
     end
 end
 
@@ -150,7 +150,7 @@ function M.new()
     end)
 
     awesome.connect_signal("lockscreen::toggle", function()
-        M.toggle()
+        	M.toggle()
     end)
 
     return M

@@ -14,6 +14,9 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey }, "Return", function()
         awful.spawn(apps.terminal)
     end, { description = "open a terminal", group = "launcher" }),
+    awful.key({ modkey }, "e", function()
+        awful.spawn(apps.file_manager)
+    end, { description = "open file manager", group = "launcher" }),
     awful.key({ modkey }, "r", function()
         awesome.emit_signal("launcher::toggle")
     end, { description = "show the menubar", group = "launcher" }),
@@ -168,7 +171,7 @@ awful.keyboard.append_global_keybindings({
             if tag then
                 tag:view_only()
             end
-        end,
+  end,
     }),
     awful.key({
         modifiers = { modkey, "Control" },

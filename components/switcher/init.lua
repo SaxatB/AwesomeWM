@@ -1,3 +1,4 @@
+
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
@@ -14,11 +15,17 @@ function M.create_default()
     widget = wibox.widget.textbox
   })
 
+ local function get_workspace_number()
+    local screen = awful.screen.focused()
+    local tag = screen.selected_tag
+    return tag and tag.index or 1
+ end
+
   local name = wibox.widget({
-    markup = "<b>Desktop</b>",
+    markup = "<b>Desktop " .. get_workspace_number() .. "</b>",
     valign = "center",
     halign = "center",
-    forced_width = beautiful.dpi(65),
+    forced_width = beautiful.dpi(80),
     forced_height = beautiful.dpi(25),
     widget = wibox.widget.textbox
   })
@@ -69,7 +76,7 @@ function M.create_widget(c)
     markup = c.class and c.class:gsub("^%l", string.upper) or "Unknown",
     valign = "center",
     halign = "center",
-    forced_width = beautiful.dpi(65),
+    forced_width = beautiful.dpi(80),
     forced_height = beautiful.dpi(25),
     widget = wibox.widget.textbox
   })
@@ -248,3 +255,4 @@ function M.stop()
 end
 
 return M.new()
+
