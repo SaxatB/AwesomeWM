@@ -28,7 +28,7 @@ local function create_bar(s)
             layout = wibox.layout.fixed.vertical
         },
         { -- Bottom widgets
-            -- Systray, Wifi+Volume, Clock, Layout
+            -- Systray, Wifi+Volume, Battery, Clock, Layout
             require("components.bar.modules.systray")(),
             require("components.bar.modules.volume")(),
             require("components.bar.modules.wifi")(),
