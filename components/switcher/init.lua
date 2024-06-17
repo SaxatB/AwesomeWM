@@ -18,8 +18,8 @@ function M.create_default()
     markup = "<b>Desktop</b>",
     valign = "center",
     halign = "center",
-    forced_width = beautiful.dpi(150),
-    forced_height = beautiful.dpi(50),
+    forced_width = beautiful.dpi(65),
+    forced_height = beautiful.dpi(25),
     widget = wibox.widget.textbox
   })
 
@@ -50,15 +50,18 @@ function M.create_default()
 end
 
 function M.create_widget(c)
-  local icon = c.icon or helpers.get_icon(c.class) or beautiful.icon_default
+  if not c.valid then
+    return
+  end
 
+  local icon = c.icon or helpers.get_icon(c.class) or beautiful.icon_awesome
   local image = wibox.widget({
     image = icon,
     resize = true,
     valign = "center",
     halign = "center",
-    forced_width = beautiful.icon_size[3],
-    forced_height = beautiful.icon_size[3],
+    forced_width = beautiful.icon_size[1],
+    forced_height = beautiful.icon_size[1],
     widget = wibox.widget.imagebox
   })
 
@@ -66,8 +69,8 @@ function M.create_widget(c)
     markup = c.class and c.class:gsub("^%l", string.upper) or "Unknown",
     valign = "center",
     halign = "center",
-    forced_width = beautiful.dpi(150),
-    forced_height = beautiful.dpi(50),
+    forced_width = beautiful.dpi(65),
+    forced_height = beautiful.dpi(25),
     widget = wibox.widget.textbox
   })
 
@@ -111,19 +114,23 @@ function M.update_clients()
   M.list:reset()
   M.clients = {}
   for _, c in ipairs(M.history) do
-    M.create_widget(c)
+    if c.valid then
+      M.create_widget(c)
+    end
   end
 
   for _, i in ipairs(awful.screen.focused().selected_tag:clients()) do
-    local in_history = false
-    for _, j in ipairs(M.history) do
-      if i == j then
-        in_history = true
-        break
+    if i.valid then
+      local in_history = false
+      for _, j in ipairs(M.history) do
+        if i == j then
+          in_history = true
+          break
+        end
       end
-    end
-    if not in_history then
-      M.create_widget(i)
+      if not in_history then
+        M.create_widget(i)
+      end
     end
   end
 
@@ -159,7 +166,7 @@ function M.cycle()
     cur = cur + 1
   end
 
-  if M.clients[cur] then
+  if M.clients[cur] and M.clients[cur].client.valid then
     M.clients[cur].background.bg = beautiful.bg2
 
     M.client_minimized = M.clients[cur].client.minimized

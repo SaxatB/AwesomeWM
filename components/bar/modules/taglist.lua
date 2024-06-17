@@ -47,7 +47,7 @@ end
 local function create_widget(s)
     local taglist = awful.widget.taglist({
         screen = s,
-        filter = awful.widget.taglist.filter.all,
+        filter = awful.widget.taglist.filter.noempty,
         layout = {
             layout = wibox.layout.fixed.vertical,
             spacing = beautiful.margin[1],

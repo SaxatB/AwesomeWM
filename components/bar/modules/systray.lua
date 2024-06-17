@@ -7,8 +7,7 @@ local function create_widget()
 	widget = wibox.widget.systray(),
         horizontal = false,
 	})
-
-    return helpers.add_margin(systray, beautiful.margin[2], beautiful.margin[1])
+	systray:set_base_size(20)
+    return helpers.add_margin(systray, beautiful.dpi(10), 0)
 end
-
 return create_widget

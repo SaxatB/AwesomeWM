@@ -9,7 +9,7 @@ local M = {}
 
 M.themes_path = gears.filesystem.get_configuration_dir()
 
-M.wallpaper = M.themes_path .. "backgrounds/ww.jpg"
+M.wallpaper = M.themes_path .. "backgrounds/mountains_1.jpg"
 screen.connect_signal("request::desktop_decoration", function(s)
     gears.wallpaper.maximized(M.wallpaper, s)
 end)
@@ -76,8 +76,8 @@ M.bar_width = M.dpi(42)
 M.titlebar_height = M.dpi(42)
 M.useless_gap = M.dpi(4)
 
-M.switcher_height = M.dpi(200)
-M.switcher_width = M.dpi(200)
+M.switcher_height = M.dpi(125)
+M.switcher_width = M.dpi(150)
 
 M.notification_bg_normal = M.bg2
 M.notification_bg_selected = M.blue
