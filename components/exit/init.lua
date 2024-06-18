@@ -253,7 +253,6 @@ function M.toggle()
         M.keygrabber:start()
         M.create_scr()
     else
-        M.input = ""
         for _, widget in pairs(M.scr) do
            widget.visible = false
         end
@@ -310,7 +309,6 @@ M.background = wibox.widget({
     layout = wibox.layout.stack
     })
 
-    M.input = ""
     M.scr = {}
 
     M.keygrabber = awful.keygrabber({
