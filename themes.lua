@@ -126,6 +126,14 @@ M.icon_lock = M.themes_path .. "assets/exit_scr/lock.svg"
 M.icon_suspend = M.themes_path .. "assets/exit_scr/suspend.svg"
 M.icon_exit = M.themes_path .. "assets/exit_scr/exit.svg"
 
+-- Tagswitch Settings
+M.bg_tagswitch    = M.bg0
+M.fg_tagswitch    = M.fg0
+M.tagswitch_width = dpi(100)
+M.tagswitch_font  = "RobotoCondensed 37"
+M.tagswitch_speed = 200
+M.tagswitch_delay = 0.25
+
 M.systray_icon_spacing = 7
 beautiful.init(M)
 

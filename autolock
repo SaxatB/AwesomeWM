@@ -1,0 +1,25 @@
+#!/bin/bash
+
+awesome-client '
+local awful = require("awful")
+local gears = require("gears")
+local capi = { root = root }
+
+-- Function to toggle the lockscreen and simulate a backspace key press
+-- local function toggle_lockscreen()
+    -- Toggle the lockscreen
+    awesome.emit_signal("lockscreen::toggle")
+
+    -- Simulate a backspace key press
+    gears.timer {
+        timeout   = 0,
+        autostart = true,
+        single_shot = true,
+        callback  = function()
+            capi.root.fake_input("key_press", 22)  -- 22 is the keycode for BackSpace
+            capi.root.fake_input("key_release", 22)
+        end
+    }
+-- end
+'
+exit
