@@ -255,19 +255,10 @@ function M.toggle()
     else
         M.input = ""
         for _, widget in pairs(M.scr) do
-            widget.visible = false
+           widget.visible = false
         end
         M.keygrabber:stop()
     end
-end
-
-function M.stop()
-    M.visible = false
-    M.input = ""
-    for _, widget in pairs(M.scr) do
-        widget.visible = false
-    end
-    M.keygrabber:stop()
 end
 
 M.background = wibox.widget({
@@ -309,7 +300,6 @@ M.background = wibox.widget({
             nil,
             expand = "none",
             layout = wibox.layout.align.horizontal
-            -- layout = wibox.layout.fixed.horizontal
         },
         layout = wibox.layout.align.vertical
     },
@@ -324,21 +314,10 @@ M.background = wibox.widget({
     M.scr = {}
 
     M.keygrabber = awful.keygrabber({
-        -- stop_event = 'release',
         mask_event_callback = true,
-        --keybindings = {awful.key {
-          --  modifiers = {},
-            --key = 'Return',
-            --on_press = function(_)
-             --   M.input = M.input
-            --end
-        --}},
         keypressed_callback = function(_, _, key, event)
-           -- if event == "release" then
-             --   return
-            --end
             if key == 'Escape' or key == 'q' or key == 'x' then
-		awesome.emit_signal("exitscreen::toggle")
+		M.toggle()
                 return
             end
 	    if key == 'p' then
