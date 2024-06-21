@@ -12,7 +12,7 @@ function M.new()
     resize = true,
     halign = "center",
     valign = "center",
-    forced_height = beautiful.icon_size[3],
+    forced_height = beautiful.icon_size[2],
     forced_width = beautiful.icon_size[3],
     clip_shape = helpers.rrect(),
     widget = wibox.widget.imagebox

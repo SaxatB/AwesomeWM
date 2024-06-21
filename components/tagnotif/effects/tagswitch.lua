@@ -25,7 +25,7 @@ M:setup {
   layout = wibox.container.place,
 }
  
-awful.placement.centered(M, { parent = awful.screen.focused() })
+awful.placement.bottom(M, { parent = awful.screen.focused(), margins = { bottom = beautiful.dpi(10) }})
  
 M.changeText = function (text)
   M:get_children_by_id("text")[1]:set_markup("<b>" .. text .. "</b>")

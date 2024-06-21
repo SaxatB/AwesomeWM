@@ -8,6 +8,6 @@ local function create_widget()
         horizontal = false,
 	})
 	systray:set_base_size(20)
-    return helpers.add_margin(systray, beautiful.dpi(10), 0)
+    return helpers.add_margin(systray, beautiful.dpi(12), 0)
 end
 return create_widget

@@ -114,7 +114,7 @@ end
 
 function M.place()
   M.wibox.screen = awful.screen.focused()
-  awful.placement.centered(M.wibox)
+  awful.placement.bottom(M.wibox, { margins = { bottom = beautiful.dpi(10) }})
 end
 
 function M.update_clients()

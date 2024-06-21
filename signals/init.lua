@@ -1,3 +1,9 @@
-require("signals.tags")
-require("signals.titlebars")
-require("signals.error")
+req = {
+	"tags",
+	"titlebars",
+	"error",
+}
+
+for _, x in pairs(req) do
+	require("signals."..x)
+end

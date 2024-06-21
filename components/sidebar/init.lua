@@ -8,7 +8,6 @@ local launcher = require("components.sidebar.modules.launcher")
 local media = require("components.sidebar.modules.media")
 local status = require("components.sidebar.modules.status")
 local notifications = require("components.sidebar.modules.notifications")
-
 local M = {}
 
 function M.toggle()
@@ -28,7 +27,7 @@ function M.toggle()
     launcher.update_apps()
     awful.spawn.easy_async_with_shell("echo $USER", function(stdout)
       stdout = stdout:gsub("[\n\r]", ""):gsub("^%l", string.upper)
-      header.name.markup = "<b>" .. stdout .. "</b>"
+      header.name.markup = "<b>Welcome, " .. stdout .. ".</b>"
     end)
     launcher.keygrabber:start()
   else
@@ -49,10 +48,13 @@ function M.new()
   M.notifications = notifications.new()
 
   M.widget = helpers.add_margin(wibox.widget({
-    M.header,
     M.launcher,
-    M.media,
+    {
+    M.header,
     M.status,
+    layout = wibox.layout.align.horizontal
+    },
+    M.media,
     M.notifications,
     fill_space = true,
     spacing = beautiful.margin[0],

@@ -38,8 +38,11 @@ ruled.client.connect_signal("request::rules", function()
 	ruled.client.append_rule({
 		id = "titlebars",
 		rule_any = {
-			type = { "normal", "dialog" },
+			type = { "normal" },
 		},
-		properties = { titlebars_enabled = false },
+		except_any = { 
+			role = { "browser" } 
+		},
+		properties = { titlebars_enabled = true },
 	})
 end)

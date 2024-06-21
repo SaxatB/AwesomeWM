@@ -92,9 +92,18 @@ client.connect_signal("request::titlebars", function(c)
     layout = wibox.layout.fixed.horizontal
   }))
 
+  local grab = helpers.add_margin(wibox.widget({
+	  {
+		  widget = wibox.widget.separator(),
+		  opacity = 0,
+	  },
+	buttons = buttons,  
+    	layout = wibox.layout.fixed.horizontal
+  }))
+
   local titlebar_widget = helpers.add_margin(wibox.widget({
     left_widget,
-    nil,
+    grab,
     right_widget,
     layout = wibox.layout.align.horizontal
   }))

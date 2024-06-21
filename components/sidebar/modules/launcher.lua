@@ -209,6 +209,7 @@ function M.keypressed_callback(_, mod, key, event)
 
 	if key == "Escape" then
 		awesome.emit_signal("launcher::stop")
+		M.selected = 1
 	end
 
 	if key == "Down" then
@@ -232,6 +233,7 @@ function M.keypressed_callback(_, mod, key, event)
 			M.run_default()
 		end
 		awesome.emit_signal("launcher::stop")
+		M.selected = 1
 	end
 
 	if #key == 1 then

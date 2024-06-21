@@ -45,7 +45,7 @@ local function create_widget()
     local stack = wibox.widget({
         {
             progressbar,
-            forced_height = beautiful.dpi(48),
+            forced_height = beautiful.dpi(42),
             direction = "east",
             layout = wibox.container.rotate
         },

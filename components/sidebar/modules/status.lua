@@ -20,7 +20,7 @@ function M.create_status_widget(icon, color, hover_text)
         colors = { color },
         bg = beautiful.bg0,
         thickness = beautiful.dpi(8),
-        forced_height = beautiful.dpi(74),
+        forced_height = beautiful.dpi(72),
         paddings = beautiful.dpi(2),
         rounded_edge = true,
         min_value = 0,
@@ -47,96 +47,6 @@ function M.create_status_widget(icon, color, hover_text)
 end
 
 function M.new()
-    local battery = M.create_status_widget("", beautiful.green, "Battery")
-    awesome.connect_signal("battery::update", function(d)
-        local percentage = math.floor(d.percentage)
-        if percentage < 25 then
-            battery.progressbar.colors[1] = beautiful.red
-            battery.widget.fg = beautiful.red
-        elseif percentage < 50 then
-            battery.progressbar.colors[1] = beautiful.orange
-            battery.widget.fg = beautiful.orange
-        elseif percentage < 75 then
-            battery.progressbar.colors[1] = beautiful.blue
-            battery.widget.fg = beautiful.blue
-        else
-            battery.progressbar.colors[1] = beautiful.green
-            battery.widget.fg = beautiful.green
-        end
-        if d.state == 1 or d.state == 4 then
-            battery.icon.markup = ""
-        end
-        battery.text.markup = tostring(percentage) .. "%"
-        battery.progressbar.value = percentage
-    end)
-
-    local volume = M.create_status_widget("", beautiful.green, "Volume")
-    awesome.connect_signal("volume::update", function(mute, vol)
-        if mute then
-            volume.icon.markup = ""
-            volume.widget.fg = beautiful.red
-            volume.progressbar.colors[1] = beautiful.red
-            return
-        end
-
-        if vol == 0 then
-            volume.icon.markup = ""
-            volume.widget.fg = beautiful.red
-            volume.progressbar.colors[1] = beautiful.red
-        elseif vol < 30 then
-            volume.icon.markup = ""
-            volume.widget.fg = beautiful.purple
-            volume.progressbar.colors[1] = beautiful.purple
-        elseif vol < 60 then
-            volume.icon.markup = ""
-            volume.widget.fg = beautiful.blue
-            volume.progressbar.colors[1] = beautiful.blue
-        else
-            volume.icon.markup = ""
-            volume.widget.fg = beautiful.green
-            volume.progressbar.colors[1] = beautiful.green
-        end
-        volume.text.markup = tostring(vol).."%"
-        volume.progressbar.value = vol
-    end)
-    volume.widget:buttons({
-        awful.button({}, 2, function()
-            awesome.emit_signal("volume::mute")
-        end),
-        awful.button({}, 4, function()
-            awesome.emit_signal("volume::increase", 5)
-        end),
-        awful.button({}, 5, function()
-            awesome.emit_signal("volume::decrease", 5)
-        end)
-    })
-
-    local brightness = M.create_status_widget("", beautiful.green, "Brightness")
-    awesome.connect_signal("brightness::update", function(value)
-        if value < 25 then
-            brightness.widget.fg = beautiful.red
-            brightness.progressbar.colors[1] = beautiful.red
-        elseif value < 50 then
-            brightness.widget.fg = beautiful.purple
-            brightness.progressbar.colors[1] = beautiful.purple
-        elseif value < 75 then
-            brightness.widget.fg = beautiful.blue
-            brightness.progressbar.colors[1] = beautiful.blue
-        else
-            brightness.widget.fg = beautiful.green
-            brightness.progressbar.colors[1] = beautiful.green
-        end
-        brightness.text.markup = tostring(value).."%"
-        brightness.progressbar.value = value
-    end)
-    brightness.widget:buttons({
-        awful.button({}, 4, function()
-            awesome.emit_signal("brightness::increase", 5)
-        end),
-        awful.button({}, 5, function()
-            awesome.emit_signal("brightness::decrease", 5)
-        end)
-    })
     local cpu = M.create_status_widget("", beautiful.green, "CPU")
     awesome.connect_signal("cpu::update", function(value)
         if value < 25 then
@@ -175,9 +85,6 @@ function M.new()
     end)
 
     M.widget = helpers.add_margin(wibox.widget({
-        battery.widget,
-        volume.widget,
-        brightness.widget,
         cpu.widget,
         memory.widget,
         spacing = beautiful.margin[2],

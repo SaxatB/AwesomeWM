@@ -6,6 +6,12 @@ local helpers = require("helpers")
 local M = {}
 
 M.buttons = {
+    {
+        icon = "",
+        cmd = "awesome-client 'awesome.emit_signal(\"lockscreen::toggle\")'",
+        text = "Lock",
+        color = beautiful.green,
+    },
    {
         icon = "",
         cmd = "awesome-client 'awesome.emit_signal(\"exitscreen::toggle\")'",
@@ -63,7 +69,7 @@ function M.new()
         widget = wibox.widget.textbox
     })
 
-    M.uptime = helpers.add_bg0(M.uptime_text)
+    M.uptime = helpers.add_bg1(M.uptime_text)
     M.uptime.fg = beautiful.fg2
 
     M.name = wibox.widget({
@@ -74,15 +80,52 @@ function M.new()
     })
 
     M.button_group = wibox.widget({
-        spacing = beautiful.margin[2],
+        spacing = beautiful.margin[1],
         layout = wibox.layout.flex.horizontal
     })
+
+     -- Weather Widget
+     M.weather_icon = wibox.widget({
+	image = beautiful.weather_cloudy,
+	resize = true,
+	forced_width = beautiful.dpi(86),
+	forced_height = beautiful.dpi(86),
+	widget = wibox.widget.imagebox	
+     })
+
+     M.temperature = wibox.widget({
+	font = beautiful.font,
+	align = "left",
+	widget = wibox.widget.textbox
+     })
+
+     M.the_weather = wibox.widget({
+	font = beautiful.font,
+	align = "left",
+	widget = wibox.widget.textbox
+     })
+
+     M.city = wibox.widget({
+	font = beautiful.font,
+	align = "left",
+	widget = wibox.widget.textbox
+     })
+
+     awesome.connect_signal("signal::weather", function(city, hows_weather, feels_like)
+	hows_weather = string.gsub(hows_weather, "'", "")
+	feels_like = string.gsub(feels_like, "\n", "")
+	M.the_weather.markup = hows_weather
+	M.temperature.markup = feels_like:match("%d%d").."°C"
+	M.city.markup = "<span font='" .. beautiful.font_icon .. "'> </span>" .. city
+end)
 
     for _, button in ipairs(M.buttons) do
         M.button_group:add(M.create_button(button.icon, button.cmd, button.text, button.color))
     end
 
     M.widget = helpers.add_margin(wibox.widget({
+	    -- Intro Widget
+	   helpers.add_bg1(helpers.add_margin({
         {
             M.pfp,
             {
@@ -94,10 +137,11 @@ function M.new()
             forced_height = beautiful.icon_size[2],
             layout = wibox.layout.fixed.horizontal
         },
-        nil,
         M.button_group,
-        expand = "none",
-        layout = wibox.layout.align.horizontal
+        layout = wibox.layout.align.vertical
+	}, beautiful.margin[1], beautiful.margin[1])),
+	spacing = beautiful.margin[1],
+        layout = wibox.layout.fixed.horizontal
     }))
 
     awesome.connect_signal("uptime::update", function(stdout)
