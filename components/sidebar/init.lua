@@ -66,7 +66,7 @@ function M.new()
     shape = helpers.rrect(),
     ontop = true,
     visible = false,
-    width = beautiful.dpi(600),
+    width = beautiful.dpi(540),
     height = awful.screen.focused().geometry.height - 4 * beautiful.useless_gap,
     border_color = beautiful.border_color_active,
     border_width = beautiful.border_width,

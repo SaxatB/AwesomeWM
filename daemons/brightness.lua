@@ -4,7 +4,7 @@ local gears = require("gears")
 local M = {}
 
 M.interval = 5
-M.script = "xbacklight -get"
+M.script = "brightnessctl -m | awk -F, '{print substr($4, 0, length($4)-1)}'"
 
 function M.update()
     awful.spawn.easy_async_with_shell(M.script, function(stdout)
@@ -25,11 +25,11 @@ function M.start()
     }
 
     awesome.connect_signal("brightness::increase", function(i)
-        awful.spawn.with_shell("xbacklight -inc "..tostring(i))
+        awful.spawn.with_shell("brightnessctl s +"..tostring(i).."%")
         M.update()
     end)
     awesome.connect_signal("brightness::decrease", function(d)
-        awful.spawn.with_shell("xbacklight -dec "..tostring(d))
+        awful.spawn.with_shell("brightnessctl s "..tostring(d).."%-")
         M.update()
     end)
 end

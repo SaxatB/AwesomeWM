@@ -9,7 +9,7 @@ local M = {}
 
 M.themes_path = gears.filesystem.get_configuration_dir()
 
-M.wallpaper = M.themes_path .. "backgrounds/pleasing.jpg"
+M.wallpaper = M.themes_path .. "backgrounds/ww.jpg"
 screen.connect_signal("request::desktop_decoration", function(s)
     gears.wallpaper.maximized(M.wallpaper, s)
 end)
@@ -133,7 +133,7 @@ M.tagswitch_width = dpi(90)
 M.tagswitch_height = dpi(75)
 M.tagswitch_font  = "RobotoCondensed 37"
 M.tagswitch_speed = 200
-M.tagswitch_delay = 0.25
+M.tagswitch_delay = 0.5
 
 M.systray_icon_spacing = 7
 beautiful.init(M)

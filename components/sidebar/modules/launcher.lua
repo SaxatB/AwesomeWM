@@ -8,8 +8,8 @@ local gears = require("gears")
 
 local M = {}
 
-M.pinned = { "Nemo", "Firefox Web Browser", "Vesktop", "Alacritty", "Spotify" }
-M.num_visible = 4 -- Number of visible apps in launcher at one time
+M.pinned = { "Nemo", "Chromium", "Vesktop", "Alacritty", "Spotify" }
+M.num_visible = 3 -- Number of visible apps in launcher at one time
 
 function M.get_apps()
 	M.apps = {}

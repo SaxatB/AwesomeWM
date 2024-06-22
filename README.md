@@ -11,15 +11,19 @@
 #### Requirements
 - [Material Design Iconic Font](https://zavoloklom.github.io/material-design-iconic-font/)
 - [Roboto Condensed Font](https://fonts.google.com/specimen/Roboto+Condensed)
-- [Rubato](https://github.com/andOrlando/rubato) (Replace the Rubato folder)
 - playerctl (Media)
-- xbacklight (Brightness)
+- brightnessctl (Brightness)
 - NetworkManager (Wifi)
 - pamixer & pactl (Audio)
 - UPower (Battery)
 - Gpick (Color Picker)
 - Maim (Screenshot)
 - xss-lock (auto screen lock)
+
+#### Installation
+- Install dependencies
+- git clone https://github.com/SaxatB/AwesomeWM.git --recurse-submodules
+- Copy this cloned directory's content to ~/.config/awesome/
 
 #### Post-Installation
 - Add your own background in `backgrounds/` and change in `themes.lua`

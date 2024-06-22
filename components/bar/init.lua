@@ -3,10 +3,6 @@ local wibox = require("wibox")
 local helpers = require("helpers")
 local beautiful = require("beautiful")
 
--- Volume and Brightness widgets
-local brightness_widget = require("components.bar.modules.brightness-widget.brightness")
-local volume_widget = require('components.bar.modules.volume-widget.volume')
-
 local function create_bar(s)
     s.bar = awful.wibar({
         position = "left",
@@ -33,12 +29,8 @@ local function create_bar(s)
         { -- Bottom widgets
             -- Systray, Battery, Volume, Brightness, Clock, Layout
             require("components.bar.modules.systray")(),
-	    brightness_widget{
-            type = 'arc',
-            program = 'brightnessctl',
-            step = 2, },
-	    volume_widget{
-            widget_type = 'arc' },
+	    require("components.bar.modules.brightness")(),
+	    require("components.bar.modules.volume")(),
 	    require("components.bar.modules.battery")(),
             require("components.bar.modules.clock")(),
             require("components.bar.modules.layout")(),
