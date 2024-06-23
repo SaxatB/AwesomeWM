@@ -1,5 +1,5 @@
 ## AwesomeWM Config
-![Preview](./preview.png)
+![Preview](./preview.jpg)
 ![Exit Screen](./exitscreen.jpg)
 
 #### Features
@@ -13,6 +13,7 @@
 - [Roboto Condensed Font](https://fonts.google.com/specimen/Roboto+Condensed)
 - playerctl (Media)
 - brightnessctl (Brightness)
+- lm-sensors (Temperature)
 - NetworkManager (Wifi)
 - pamixer & pactl (Audio)
 - UPower (Battery)
