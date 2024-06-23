@@ -33,6 +33,7 @@ function M.update_art()
                         awesome.emit_signal("playerctl::art::update", art_path)
                     end)
                 end
+		collectgarbage("collect")
             end
         })
 end
@@ -47,6 +48,7 @@ function M.update_metadata()
                 local player_name = stdout:match('player_name_(.*)album_') or nil
                 local album = gears.string.xml_escape(stdout:match('album_(.*)')) or nil
                 awesome.emit_signal("playerctl::metadata::update", title, artist, player_name, album)
+		collectgarbage("collect")
             end
         })
 end

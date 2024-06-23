@@ -6,6 +6,7 @@ req = {
 	"cpu",
 	"memory",
 	"temperature",
+	"hdd",
 	"uptime"
 }
 

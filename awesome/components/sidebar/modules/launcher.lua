@@ -9,7 +9,7 @@ local gears = require("gears")
 local M = {}
 
 M.pinned = { "Nemo", "Chromium", "Vesktop", "Alacritty", "Spotify" }
-M.num_visible = 4 -- Number of visible apps in launcher at one time
+M.num_visible = 3 -- Number of visible apps in launcher at one time
 
 function M.get_apps()
 	M.apps = {}
@@ -248,7 +248,9 @@ function M.keypressed_callback(_, mod, key, event)
 		M.prompt.text = "|"
 	else
 		M.prompt.text = M.input .. "|"
+		M.selected = 1
 	end
+
 	M.update_apps()
 end
 
@@ -302,7 +304,7 @@ function M.new()
 			layout = wibox.layout.fixed.vertical,
 		})),
 		bg = beautiful.bg0,
-		forced_height = beautiful.dpi(315),
+		forced_height = beautiful.dpi(250),
 		layout = wibox.container.background,
 	})
 

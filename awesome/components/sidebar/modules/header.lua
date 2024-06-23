@@ -70,7 +70,7 @@ function M.new()
     })
 
     M.uptime = M.uptime_text
-    M.uptime.fg = beautiful.fg2
+    M.uptime.fg = beautiful.fg1
 
     M.name = wibox.widget({
         markup = "",

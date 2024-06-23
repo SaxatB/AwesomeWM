@@ -10,6 +10,7 @@ function M.update()
     awful.spawn.easy_async_with_shell(M.script, function(stdout)
         local memory = tonumber(stdout)
         awesome.emit_signal("memory::update", math.floor(memory))
+	collectgarbage("collect")
     end)
 end
 

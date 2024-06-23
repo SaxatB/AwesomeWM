@@ -34,7 +34,7 @@ end
 
 -- Goodbye text
 M.username = os.getenv("USER")
-M.goodbye_widget = wibox.widget.textbox("[ Goodbye " .. M.username:sub(1,1):upper()..M.username:sub(2) .. " ]")
+M.goodbye_widget = wibox.widget.textbox("This is where it had to end, " .. M.username:sub(1,1):upper()..M.username:sub(2)..".")
 M.goodbye_widget.font = "RobotoCondensed 26"
 text_font = beautiful.font or "sans 20"
 

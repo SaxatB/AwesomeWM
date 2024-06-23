@@ -14,6 +14,7 @@ function M.update()
             local temp_percentage = (temp / M.max_temp) * 100
             awesome.emit_signal("temperature::update", math.floor(temp_percentage))
         end
+	collectgarbage("collect")
     end)
 end
 

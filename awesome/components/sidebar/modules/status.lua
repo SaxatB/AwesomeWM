@@ -6,7 +6,7 @@ local config = require("config")
 
 local M = {}
 
-function M.create_status_widget(icon, color, hover_text)
+function M.create_status_widget(icon, color)
     local icon_widget = wibox.widget({
         markup = icon,
         font = beautiful.font_icon_medium,
@@ -47,7 +47,7 @@ function M.create_status_widget(icon, color, hover_text)
 end
 
 function M.new()
-    local cpu = M.create_status_widget("", beautiful.green, "CPU")
+    local cpu = M.create_status_widget("", beautiful.green)
     awesome.connect_signal("cpu::update", function(value)
         if value < 25 then
             cpu.widget.fg = beautiful.green
@@ -65,7 +65,7 @@ function M.new()
         cpu.text.markup = tostring(value).."%"
         cpu.progressbar.value = value
     end)
-    local memory = M.create_status_widget("", beautiful.green, "Memory")
+    local memory = M.create_status_widget("", beautiful.green)
     awesome.connect_signal("memory::update", function(value)
         if value < 25 then
             memory.widget.fg = beautiful.green
@@ -83,7 +83,7 @@ function M.new()
         memory.text.markup = tostring(value).."%"
         memory.progressbar.value = value
     end)
-    local temperature = M.create_status_widget("", beautiful.red, "Temperature")
+    local temperature = M.create_status_widget("", beautiful.red)
     awesome.connect_signal("temperature::update", function(value)
         if value < 40 then
             temperature.widget.fg = beautiful.green
@@ -98,10 +98,26 @@ function M.new()
         temperature.text.markup = tostring(value).."°C"
         temperature.progressbar.value = value
     end)
+    local storage = M.create_status_widget("", beautiful.purple)
+    awesome.connect_signal("hdd::update", function(value)
+        if value < 40 then
+            storage.widget.fg = beautiful.green
+            storage.progressbar.colors[1] = beautiful.green
+        elseif value < 60 then
+            storage.widget.fg = beautiful.blue
+            storage.progressbar.colors[1] = beautiful.blue
+        else
+            storage.widget.fg = beautiful.red
+            storage.progressbar.colors[1] = beautiful.red
+        end
+        storage.text.markup = tostring(value).."%"
+        storage.progressbar.value = value
+    end)
 
     M.widget = helpers.add_margin(wibox.widget({
         cpu.widget,
         memory.widget,
+	storage.widget,
 	temperature.widget,
         spacing = beautiful.margin[1],
         layout = wibox.layout.flex.horizontal
