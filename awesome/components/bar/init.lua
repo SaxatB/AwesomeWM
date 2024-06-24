@@ -28,7 +28,7 @@ local function create_bar(s)
         },
         { -- Bottom widgets
             -- Systray, Battery, Volume, Brightness, Clock, Layout
-            helpers.add_margin(require("components.bar.modules.systray")(), beautiful.margin[1], 0),
+            require("components.bar.modules.systray")(),
 	    require("components.bar.modules.brightness")(),
 	    require("components.bar.modules.volume")(),
 	    require("components.bar.modules.battery")(),

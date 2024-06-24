@@ -42,8 +42,8 @@ ruled.client.connect_signal("request::rules", function()
 			type = { "normal" },
 		},
 		except_any = { 
-			class = { "Gnome-disks", "Gedit", "Gnome-multi-writer" },
-			role = { "browser", "pop-up" } 
+			class = { "Gnome-disks", "Gedit", "Gnome-multi-writer", "Gcr-prompter" },
+			role = { "browser" } 
 		},
 		properties = { titlebars_enabled = true },
 	})
