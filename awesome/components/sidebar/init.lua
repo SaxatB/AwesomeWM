@@ -50,8 +50,8 @@ function M.new()
   M.widget = helpers.add_margin(wibox.widget({
     M.header,
     M.launcher,
-    M.status,
     M.media,
+    M.status,
     M.notifications,
     fill_space = true,
     spacing = beautiful.margin[0],

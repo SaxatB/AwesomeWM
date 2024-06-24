@@ -22,7 +22,7 @@ function M.new()
     M.dnd_active = false
 
     M.dnd_button = helpers.add_bg1(wibox.widget({
-	markup = "",
+	markup = "",
         font = beautiful.font_icon,
         valign = "center",
         halign = "right",
@@ -33,8 +33,8 @@ function M.new()
     function M.toggle_dnd()
         M.dnd_active = not M.dnd_active
         if M.dnd_active then
-	    M.dnd_button.fg = beautiful.red
-	    naughty.suspended = true 
+	    M.dnd_button.fg = beautiful.fg1
+	    naughty.suspended = true
         else
     	    M.dnd_button.fg = beautiful.blue
 	    naughty.suspended = false

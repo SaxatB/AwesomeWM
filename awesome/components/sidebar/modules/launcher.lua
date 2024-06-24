@@ -298,7 +298,7 @@ function M.new()
 			layout = wibox.layout.fixed.vertical,
 		})),
 		bg = beautiful.bg0,
-		forced_height = beautiful.dpi(250),
+		forced_height = beautiful.dpi(315),
 		layout = wibox.container.background,
 	})
 

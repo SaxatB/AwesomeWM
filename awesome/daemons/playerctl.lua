@@ -23,17 +23,18 @@ function M.update_art()
         {
             stdout = function(stdout)
                 local art_url = stdout or ""
-
                 art_url = art_url:gsub('%\n', '')
                 art_url = art_url:gsub("open.spotify.com", "i.scdn.co")
                 local art_path = ""
-                if art_url ~= nil then
+
+                if art_url ~= nil and art_url ~= "" then
                     art_path = os.tmpname()
                     awful.spawn.easy_async_with_shell("curl -L -s " .. art_url .. " -o " .. art_path, function()
                         awesome.emit_signal("playerctl::art::update", art_path)
                     end)
+                else
+                    awesome.emit_signal("playerctl::art::update", nil)
                 end
-		collectgarbage("collect")
             end
         })
 end
@@ -48,7 +49,6 @@ function M.update_metadata()
                 local player_name = stdout:match('player_name_(.*)album_') or nil
                 local album = gears.string.xml_escape(stdout:match('album_(.*)')) or nil
                 awesome.emit_signal("playerctl::metadata::update", title, artist, player_name, album)
-		collectgarbage("collect")
             end
         })
 end
