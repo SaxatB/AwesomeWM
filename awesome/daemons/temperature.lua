@@ -4,7 +4,6 @@ local gears = require("gears")
 local M = {}
 
 M.interval = 5
-M.max_temp = 100
 M.script = "sensors | grep 'CPU:' | awk '{print $2}' | tr -d '+°C'"
 
 function M.update()
