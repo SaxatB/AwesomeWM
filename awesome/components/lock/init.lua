@@ -30,17 +30,25 @@ function M.create_wiboxes()
     end
 end
 
+function M.update_wiboxes()
+    for s in screen do
+        local w = M.wiboxes[s]
+        if w then
+            w:geometry({
+                width = s.geometry.width,
+                height = s.geometry.height,
+                x = s.geometry.x,
+                y = s.geometry.y
+            })
+        end
+    end
+end
+
 function M.toggle()
     if not M.visible then
-        M.keygrabber:start()
+        M.visible = true
         M.create_wiboxes()
-	M.visible = true
---    else
---        M.input = ""
---        for _, widget in pairs(M.wiboxes) do
---            widget.visible = false
---        end
---        M.keygrabber:stop()
+        M.keygrabber:start()
     end
 end
 
@@ -149,8 +157,14 @@ function M.new()
         end
     end)
 
+    screen.connect_signal("property::geometry", function()
+        if M.visible then
+            M.update_wiboxes()
+        end
+    end)
+
     awesome.connect_signal("lockscreen::toggle", function()
-        	M.toggle()
+        M.toggle()
     end)
 
     return M

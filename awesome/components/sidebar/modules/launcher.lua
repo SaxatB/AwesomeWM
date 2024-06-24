@@ -203,49 +203,45 @@ function M.keypressed_callback(_, mod, key, event)
 		return
 	end
 
+	local input_changed = false
+
 	if key == "BackSpace" then
 		M.input = M.input:sub(1, -2)
-	end
-
-	if key == "Escape" then
+		input_changed = true
+	elseif key == "Escape" then
 		awesome.emit_signal("launcher::stop")
-	end
-
-	if key == "Down" then
-		M.selected = M.selected + 1
-		if M.selected == #M.matches + 2 then
-			M.selected = 1
-		end
-	end
-
-	if key == "Up" then
-		M.selected = M.selected - 1
-		if M.selected == 0 then
-			M.selected = #M.matches + 1
-		end
-	end
-
-	if key == "Return" then
+	elseif key == "Return" then
 		if M.selected <= #M.matches then
 			M.run_app(M.matches[M.selected])
 		else
 			M.run_default()
 		end
 		awesome.emit_signal("launcher::stop")
-	end
-
-	if #key == 1 then
+	elseif key == "Down" then
+		M.selected = M.selected + 1
+		if M.selected > #M.matches + 1 then
+			M.selected = 1
+		end
+	elseif key == "Up" then
+		M.selected = M.selected - 1
+		if M.selected < 1 then
+			M.selected = #M.matches + 1
+		end
+	elseif #key == 1 then
 		if not M.input then
 			M.input = key
 		else
 			M.input = M.input .. key
 		end
+		input_changed = true
 	end
 
-	if not M.input or M.input == "" then
-		M.prompt.text = "|"
-	else
-		M.prompt.text = M.input .. "|"
+	if input_changed then
+		if not M.input or M.input == "" then
+			M.prompt.text = "|"
+		else
+			M.prompt.text = M.input .. "|"
+		end
 		M.selected = 1
 	end
 
@@ -309,17 +305,17 @@ function M.new()
 	M.widget:buttons({
 		awful.button({}, 4, function()
 			M.selected = M.selected - 1
-			if M.selected == 0 then
+			if M.selected < 1 then
 				M.selected = #M.matches + 1
 			end
-      M.update_apps()
+			M.update_apps()
 		end),
 		awful.button({}, 5, function()
 			M.selected = M.selected + 1
-			if M.selected == #M.matches + 2 then
+			if M.selected > #M.matches + 1 then
 				M.selected = 1
 			end
-      M.update_apps()
+			M.update_apps()
 		end),
 	})
 

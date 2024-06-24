@@ -9,7 +9,7 @@ local M = {}
 
 M.themes_path = gears.filesystem.get_configuration_dir()
 
-M.wallpaper = M.themes_path .. "backgrounds/mountains_1.jpg"
+M.wallpaper = M.themes_path .. "backgrounds/ww.jpg"
 screen.connect_signal("request::desktop_decoration", function(s)
     gears.wallpaper.maximized(M.wallpaper, s)
 end)
@@ -43,8 +43,8 @@ M.icon_size[4] = M.dpi(128)
 
 -- Material Dark Theme
 M.bg0 = "#121212"
-M.bg1 = "#1e1e1e"
-M.bg2 = "#252525"
+M.bg1 = "#1b1b1b"
+M.bg2 = "#272727"
 M.fg0 = "#eeffff"
 M.fg1 = "#727272"
 M.fg2 = "#b0bec5"
@@ -53,7 +53,7 @@ M.red = "#f07178"
 M.orange = "#f78c6c"
 M.green = "#c3e88d"
 M.cyan = "#89ddff"
-M.blue = "#82aaff"
+M.blue = "#8ab4f8"
 M.purple = "#c792ea"
 
 -- Default colors

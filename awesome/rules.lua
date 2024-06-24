@@ -21,6 +21,7 @@ ruled.client.connect_signal("request::rules", function()
 			class = {
 				"Blueman-manager",
 				"Gpick",
+				"Gnome-multi-writer",
 			},
 			name = {
 				"Event Tester",
@@ -42,7 +43,7 @@ ruled.client.connect_signal("request::rules", function()
 		},
 		except_any = { 
 			class = { "Gnome-disks", "Gedit", "Gnome-multi-writer" },
-			role = { "browser" } 
+			role = { "browser", "pop-up" } 
 		},
 		properties = { titlebars_enabled = true },
 	})

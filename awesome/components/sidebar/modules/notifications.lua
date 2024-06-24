@@ -18,6 +18,34 @@ function M.new()
     M.erase = helpers.add_bg1(M.erase_icon)
     M.erase.fg = beautiful.blue
 
+    -- Do Not Disturb (DND)
+    M.dnd_active = false
+
+    M.dnd_button = helpers.add_bg1(wibox.widget({
+	markup = "",
+        font = beautiful.font_icon,
+        valign = "center",
+        halign = "right",
+        widget = wibox.widget.textbox
+    }))
+    M.dnd_button.fg = beautiful.blue
+
+    function M.toggle_dnd()
+        M.dnd_active = not M.dnd_active
+        if M.dnd_active then
+	    M.dnd_button.fg = beautiful.red
+	    naughty.suspended = true 
+        else
+    	    M.dnd_button.fg = beautiful.blue
+	    naughty.suspended = false
+        end
+    end
+
+    M.dnd_button:buttons(awful.util.table.join(
+        awful.button({}, 1, function()
+            M.toggle_dnd()
+        end)
+    ))
 
     M.notifications = wibox.widget({
         spacing = beautiful.margin[0],
@@ -42,8 +70,13 @@ function M.new()
                 markup = "<b>Notifications</b>",
                 widget = wibox.widget.textbox
             },
-            nil,
+	    nil,
+        {
+	    M.dnd_button,
             M.erase,
+	    spacing = beautiful.margin[1],
+            layout = wibox.layout.fixed.horizontal,
+    	},
             layout = wibox.layout.align.horizontal,
         }), beautiful.margin[1], beautiful.margin[1]),
         M.notifications,
@@ -134,8 +167,6 @@ function M.new()
             markup = "<b>" .. n.app_name .. "</b>",
             widget = wibox.widget.textbox
         })
-
-	-- DND TEXT ''
 
         local actions = wibox.widget({
             notification = n,

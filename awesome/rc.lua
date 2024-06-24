@@ -1,4 +1,3 @@
-pcall(require, "luarocks.loader")
 local awful = require("awful")
 local gears  = require("gears")
 local gfs = require("gears.filesystem")
@@ -31,6 +30,9 @@ helpers.check_if_running("picom", nil, function()
 	awful.spawn("picom --config " .. gfs.get_configuration_dir() .. "picom.conf", false)
 end)
 
+helpers.check_if_running("xss-lock", nil, function()
+	awful.spawn("xss-lock -- " .. gfs.get_configuration_dir() .. "autolock", false)
+end)
 -- helpers.run_once_pgrep("copyq")
 -- helpers.run_once_pgrep("mpDris2")
 	--- Polkit Agent
@@ -42,7 +44,6 @@ end)
 helpers.run_once_grep("blueman-applet")
 helpers.run_once_grep("nm-applet")
 helpers.run_once_grep("numlockx")
-helpers.run_once_grep("xss-lock -- " .. gfs.get_configuration_dir() .. "autolock")
 
 -- Mem Clean
 local collectgarbage = collectgarbage
@@ -55,9 +56,9 @@ local memory_growth_factor = 1.1 -- 10% over last
 local memory_long_collection_time = 300 -- five minutes in seconds
 
 local gtimer = require("gears.timer")
-gtimer.start_new(30, function()
+gtimer.start_new(5, function()
 	local cur_memory = collectgarbage("count")
-	-- instead of forcing a garbage collection every 30 seconds
+	-- instead of forcing a garbage collection every 5 seconds
 	-- check to see if memory has grown enough since we last ran
 	-- or if we have waited a sificiently long time
 	local elapsed = os.time() - memory_last_run_time
