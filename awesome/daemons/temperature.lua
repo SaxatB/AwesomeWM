@@ -10,12 +10,9 @@ M.script = "sensors | grep 'CPU:' | awk '{print $2}' | tr -d '+°C'"
 function M.update()
     awful.spawn.easy_async_with_shell(M.script, function(stdout)
         local temp = tonumber(stdout)
-        if temp then
-            local temp_percentage = (temp / M.max_temp) * 100
-            awesome.emit_signal("temperature::update", math.floor(temp_percentage))
-        end
-	collectgarbage("collect")
+            awesome.emit_signal("temperature::update", math.floor(temp))
     end)
+    collectgarbage("collect")
 end
 
 function M.start()
