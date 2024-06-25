@@ -8,6 +8,28 @@ local helpers = require("helpers")
 
 local M = {}
 
+-- DND Status saved in file
+local dnd_status_file = gears.filesystem.get_configuration_dir() .. "components/sidebar/modules/dnd_stat"
+
+local function read_dnd_status()
+    local file = io.open(dnd_status_file, "r")
+    if file then
+        local status = file:read("*a")
+        file:close()
+        return status == "true"
+    else
+        return false
+    end
+end
+
+local function write_dnd_status(status)
+    local file = io.open(dnd_status_file, "w")
+    if file then
+        file:write(status and "true" or "false")
+        file:close()
+    end
+end
+
 function M.new()
     M.erase_icon = wibox.widget({
         markup = "",
@@ -21,7 +43,7 @@ function M.new()
     M.erase.fg = beautiful.blue
 
 -- Do Not Disturb (DND)
-    M.dnd_active = false
+M.dnd_active = read_dnd_status()
 
     M.dnd_button = helpers.add_bg1(wibox.widget({
 	markup = "",
@@ -30,7 +52,7 @@ function M.new()
         halign = "right",
         widget = wibox.widget.textbox
     }))
-    M.dnd_button.fg = beautiful.blue
+    M.dnd_button.fg = M.dnd_active and beautiful.fg1 or beautiful.blue
 
 function start_dnd()
     M.dnd_active = true
@@ -42,10 +64,12 @@ function start_dnd()
             return false
         end
     end)
+    write_dnd_status(true)
 end
 
 function stop_dnd()
     M.dnd_active = false
+    write_dnd_status(false)
 end
 
 function M.toggle_dnd()
@@ -64,6 +88,12 @@ function M.toggle_dnd()
             M.toggle_dnd()
         end)
     ))
+
+   -- Fix for DND not working after refresh
+   if M.dnd_active then
+        start_dnd()
+    end
+-- End of DND
 
     M.notifications = wibox.widget({
         spacing = beautiful.margin[0],
