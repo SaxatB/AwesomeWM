@@ -31,8 +31,9 @@ helpers.check_if_running("picom", nil, function()
 end)
 
 helpers.check_if_running("xss-lock", nil, function()
-	awful.spawn("xss-lock -- " .. gfs.get_configuration_dir() .. "autolock", false)
+	awful.spawn("xss-lock --transfer-sleep-lock -- " .. gfs.get_configuration_dir() .. "autolock", false)
 end)
+
 -- helpers.run_once_pgrep("copyq")
 -- helpers.run_once_pgrep("mpDris2")
 	--- Polkit Agent
@@ -56,7 +57,7 @@ local memory_growth_factor = 1.1 -- 10% over last
 local memory_long_collection_time = 300 -- five minutes in seconds
 
 local gtimer = require("gears.timer")
-gtimer.start_new(5, function()
+gtimer.start_new(10, function()
 	local cur_memory = collectgarbage("count")
 	-- instead of forcing a garbage collection every 5 seconds
 	-- check to see if memory has grown enough since we last ran
