@@ -1,7 +1,9 @@
+
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
+local gears = require("gears")
 local helpers = require("helpers")
 
 local M = {}
@@ -18,7 +20,7 @@ function M.new()
     M.erase = helpers.add_bg1(M.erase_icon)
     M.erase.fg = beautiful.blue
 
-    -- Do Not Disturb (DND)
+-- Do Not Disturb (DND)
     M.dnd_active = false
 
     M.dnd_button = helpers.add_bg1(wibox.widget({
@@ -30,14 +32,30 @@ function M.new()
     }))
     M.dnd_button.fg = beautiful.blue
 
-    function M.toggle_dnd()
-        M.dnd_active = not M.dnd_active
+function start_dnd()
+    M.dnd_active = true
+    gears.timer.start_new(0, function()
+        if M.dnd_active then
+            naughty.destroy_all_notifications()
+            return true
+        else
+            return false
+        end
+    end)
+end
+
+function stop_dnd()
+    M.dnd_active = false
+end
+
+function M.toggle_dnd()
+       M.dnd_active = not M.dnd_active
         if M.dnd_active then
 	    M.dnd_button.fg = beautiful.fg1
-	    naughty.suspended = true
+	    start_dnd()
         else
     	    M.dnd_button.fg = beautiful.blue
-	    naughty.suspended = false
+	    stop_dnd()
         end
     end
 
