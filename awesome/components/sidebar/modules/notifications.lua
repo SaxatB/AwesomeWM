@@ -1,4 +1,3 @@
-
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
@@ -8,7 +7,6 @@ local helpers = require("helpers")
 
 local M = {}
 
--- DND Status saved in file
 local dnd_status_file = gears.filesystem.get_configuration_dir() .. "components/sidebar/modules/dnd_stat"
 
 local function read_dnd_status()
@@ -42,11 +40,10 @@ function M.new()
     M.erase = helpers.add_bg1(M.erase_icon)
     M.erase.fg = beautiful.blue
 
--- Do Not Disturb (DND)
-M.dnd_active = read_dnd_status()
+    M.dnd_active = read_dnd_status()
 
     M.dnd_button = helpers.add_bg1(wibox.widget({
-	markup = "",
+        markup = "",
         font = beautiful.font_icon,
         valign = "center",
         halign = "right",
@@ -54,32 +51,43 @@ M.dnd_active = read_dnd_status()
     }))
     M.dnd_button.fg = M.dnd_active and beautiful.fg1 or beautiful.blue
 
-function start_dnd()
-    M.dnd_active = true
-    gears.timer.start_new(0, function()
-        if M.dnd_active then
-            naughty.destroy_all_notifications()
-            return true
-        else
-            return false
+    local dnd_timer = nil
+
+    local function start_dnd()
+        if dnd_timer then
+            dnd_timer:stop()
         end
-    end)
-    write_dnd_status(true)
-end
+        dnd_timer = gears.timer({
+            timeout = 0.1,
+            call_now = true,
+            autostart = true,
+            callback = function()
+                if M.dnd_active then
+                    naughty.destroy_all_notifications()
+                else
+                    dnd_timer:stop()
+                end
+            end
+        })
+        write_dnd_status(true)
+    end
 
-function stop_dnd()
-    M.dnd_active = false
-    write_dnd_status(false)
-end
+    local function stop_dnd()
+        if dnd_timer then
+            dnd_timer:stop()
+            dnd_timer = nil
+        end
+        write_dnd_status(false)
+    end
 
-function M.toggle_dnd()
-       M.dnd_active = not M.dnd_active
+    function M.toggle_dnd()
+        M.dnd_active = not M.dnd_active
         if M.dnd_active then
-	    M.dnd_button.fg = beautiful.fg1
-	    start_dnd()
+            M.dnd_button.fg = beautiful.fg1
+            start_dnd()
         else
-    	    M.dnd_button.fg = beautiful.blue
-	    stop_dnd()
+            M.dnd_button.fg = beautiful.blue
+            stop_dnd()
         end
     end
 
@@ -89,11 +97,9 @@ function M.toggle_dnd()
         end)
     ))
 
-   -- Fix for DND not working after refresh
-   if M.dnd_active then
+    if M.dnd_active then
         start_dnd()
     end
--- End of DND
 
     M.notifications = wibox.widget({
         spacing = beautiful.margin[0],
@@ -118,13 +124,13 @@ function M.toggle_dnd()
                 markup = "<b>Notifications</b>",
                 widget = wibox.widget.textbox
             },
-	    nil,
-        {
-	    M.dnd_button,
-            M.erase,
-	    spacing = beautiful.margin[1],
-            layout = wibox.layout.fixed.horizontal,
-    	},
+            nil,
+            {
+                M.dnd_button,
+                M.erase,
+                spacing = beautiful.margin[1],
+                layout = wibox.layout.fixed.horizontal,
+            },
             layout = wibox.layout.align.horizontal,
         }), beautiful.margin[1], beautiful.margin[1]),
         M.notifications,
