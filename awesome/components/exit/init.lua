@@ -230,6 +230,20 @@ local lock_widget = wibox.widget({
 lock_widget:connect_signal("button::press", M.lock)
 helpers.add_hover_cursor(lock_widget, "hand1")
 
+-- Exit (Exit Screen) Button 
+local exit_btn = wibox.widget({
+	text = "",
+	font = beautiful.font_icon_medium,
+	valign = "center",
+	halign = "right",
+	widget = wibox.widget.textbox
+})
+
+exit_btn:connect_signal("button::press", function()
+	awesome.emit_signal("exitscreen::toggle")
+end)
+helpers.add_hover_cursor(exit_btn, "hand1")
+
 -- Screen
 function M.create_scr()
 	for s in screen do
@@ -275,7 +289,7 @@ M.background = wibox.widget({
     M.widget = wibox.widget({
     M.background,
     {
-	    nil,
+		    helpers.add_margin(exit_btn, beautiful.margin[2], beautiful.margin[1]),
     {
         {
             nil,
