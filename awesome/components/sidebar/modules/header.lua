@@ -10,13 +10,13 @@ M.buttons = {
         icon = "",
         cmd = "awesome-client 'awesome.emit_signal(\"lockscreen::toggle\")'",
         text = "Lock",
-        color = beautiful.green,
+        color = beautiful.blue,
     },
    {
         icon = "",
         cmd = "awesome-client 'awesome.emit_signal(\"exitscreen::toggle\")'",
         text = "Exit",
-        color = beautiful.blue,
+        color = beautiful.red,
    }
 }
 

@@ -26,8 +26,8 @@ function M.toggle()
     launcher.get_apps()
     launcher.update_apps()
     awful.spawn.easy_async_with_shell("echo $USER", function(stdout)
-      stdout = stdout:gsub("[\n\r]", ""):gsub("^%l", string.upper)
-      header.name.markup = "<b>Welcome, " .. stdout .. ".</b>"
+      stdout = stdout:gsub("[\n\r]", "")
+      header.name.markup = "<b>@" .. stdout .. "</b>"
     end)
     launcher.keygrabber:start()
   else

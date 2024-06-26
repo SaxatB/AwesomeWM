@@ -7,8 +7,6 @@ local function update(background, tooltip, bright)
 	if bright < 25 then
         background.fg = beautiful.red
 	elseif bright < 50 then
-        background.fg = beautiful.purple
-	elseif bright < 75 then
         background.fg = beautiful.blue
 	else
         background.fg = beautiful.green
