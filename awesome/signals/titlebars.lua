@@ -33,6 +33,7 @@ client.connect_signal("request::titlebars", function(c)
   end) })
 
   local minimize_icon = wibox.widget({
+	  {
     valign = "center",
     halign = "center",
     markup = "",
@@ -40,14 +41,12 @@ client.connect_signal("request::titlebars", function(c)
     forced_height = beautiful.icon_size[1],
     font = beautiful.font_icon,
     widget = wibox.widget.textbox
+    },
+    awful.titlebar.widget.minimizebutton(c),
+    widget = wibox.layout.stack
   })
 
-  -- Ok this doesn't work properly, see https://github.com/awesomeWM/awesome/issues/3716 :(
-
   local minimize_button = helpers.add_bg(minimize_icon)
-  minimize_button:buttons({ awful.button({}, 1, function()
-    c.minimized = true
-  end) })
 
   local maximize_icon = wibox.widget({
     valign = "center",
@@ -85,7 +84,7 @@ client.connect_signal("request::titlebars", function(c)
   }))
 
   local right_widget = helpers.add_margin(wibox.widget({
-    -- minimize_button,
+    minimize_button,
     maximize_button,
     close_button,
     spacing = beautiful.margin[0],
