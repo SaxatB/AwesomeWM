@@ -9,9 +9,15 @@ local M = {}
 
 M.themes_path = gears.filesystem.get_configuration_dir()
 
-M.wallpaper = M.themes_path .. "backgrounds/mountains_1.jpg"
+M.wallpaper = M.themes_path .. "backgrounds/ww.jpg"
 screen.connect_signal("request::desktop_decoration", function(s)
-    gears.wallpaper.maximized(M.wallpaper, s)
+  if M.wallpaper then
+    local wall = M.wallpaper
+    if type(wall) == "function" then
+      wall = wall(s)
+    end
+    gears.wallpaper.maximized(wall, s, true)
+  end
 end)
 
 -- Converts the input to dpi
@@ -74,7 +80,7 @@ M.border_width = dpi(2)
 -- Configs
 M.bar_width = M.dpi(42)
 
-M.titlebar_height = M.dpi(42)
+M.titlebar_height = M.dpi(38)
 M.useless_gap = M.dpi(4)
 
 M.switcher_height = M.dpi(125)

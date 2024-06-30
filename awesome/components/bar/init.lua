@@ -4,6 +4,8 @@ local helpers = require("helpers")
 local beautiful = require("beautiful")
 
 local function create_bar(s)
+    if s.bar then s.bar:remove() end
+
     s.bar = awful.wibar({
         position = "left",
         width = beautiful.bar_width,
@@ -29,9 +31,9 @@ local function create_bar(s)
         { -- Bottom widgets
             -- Systray, Battery, Volume, Brightness, Clock, Layout
             require("components.bar.modules.systray")(),
-	    require("components.bar.modules.brightness")(),
-	    require("components.bar.modules.volume")(),
-	    require("components.bar.modules.battery")(),
+	        require("components.bar.modules.brightness")(),
+	        require("components.bar.modules.volume")(),
+	        require("components.bar.modules.battery")(),
             require("components.bar.modules.clock")(),
             require("components.bar.modules.layout")(),
             spacing = beautiful.margin[1],
@@ -41,5 +43,9 @@ local function create_bar(s)
 end
 
 screen.connect_signal("request::desktop_decoration", function(s)
+    create_bar(s)
+end)
+
+screen.connect_signal("property::geometry", function(s)
     create_bar(s)
 end)
