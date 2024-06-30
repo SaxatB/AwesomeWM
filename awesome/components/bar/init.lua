@@ -31,9 +31,10 @@ local function create_bar(s)
         { -- Bottom widgets
             -- Systray, Battery, Volume, Brightness, Clock, Layout
             require("components.bar.modules.systray")(),
-	        require("components.bar.modules.brightness")(),
-	        require("components.bar.modules.volume")(),
-	        require("components.bar.modules.battery")(),
+	    require("components.bar.modules.brightness")(),
+	    require("components.bar.modules.mic")(),
+	    require("components.bar.modules.volume")(),
+	    require("components.bar.modules.battery")(),
             require("components.bar.modules.clock")(),
             require("components.bar.modules.layout")(),
             spacing = beautiful.margin[1],

@@ -78,7 +78,7 @@ M.border_width = dpi(2)
 -- Configs
 M.bar_width = M.dpi(42)
 
-M.titlebar_height = M.dpi(38)
+M.titlebar_height = M.dpi(40)
 M.useless_gap = M.dpi(4)
 
 M.switcher_height = M.dpi(125)
