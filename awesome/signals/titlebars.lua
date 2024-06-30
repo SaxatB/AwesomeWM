@@ -47,6 +47,8 @@ client.connect_signal("request::titlebars", function(c)
   })
 
   local minimize_button = helpers.add_bg(minimize_icon)
+  -- Disable tooltip
+  awful.titlebar.enable_tooltip = false
 
   local maximize_icon = wibox.widget({
     valign = "center",

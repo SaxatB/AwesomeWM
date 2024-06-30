@@ -6,7 +6,7 @@ local helpers = require("helpers")
 
 local function create_widget()
     local clock = wibox.widget({
-        format = '%I\n%M',
+        format = '%H\n%M',
         valign = "center",
         halign = "center",
         widget = wibox.widget.textclock,

@@ -30,10 +30,6 @@ helpers.check_if_running("picom", nil, function()
 	awful.spawn("picom --config " .. gfs.get_configuration_dir() .. "picom.conf", false)
 end)
 
-helpers.check_if_running("xss-lock", nil, function()
-	awful.spawn("xss-lock --transfer-sleep-lock -- " .. gfs.get_configuration_dir() .. "autolock", false)
-end)
-
 -- helpers.run_once_pgrep("copyq")
 -- helpers.run_once_pgrep("mpDris2")
 	--- Polkit Agent
@@ -41,7 +37,7 @@ end)
 		"polkit-gnome-authentication-agent-1",
 		"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 	)
-	--- Other stuff
+-- Other stuff
 helpers.run_once_grep("blueman-applet")
 helpers.run_once_grep("nm-applet")
 helpers.run_once_grep("numlockx")

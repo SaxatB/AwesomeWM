@@ -13,13 +13,11 @@
 - [Roboto Condensed Font](https://fonts.google.com/specimen/Roboto+Condensed)
 - playerctl (Media)
 - brightnessctl (Brightness)
-- lm-sensors (Temperature)
 - NetworkManager (Wifi)
 - pamixer & pactl (Audio)
 - UPower (Battery)
 - Gpick (Color Picker)
 - Maim (Screenshot)
-- xss-lock (auto screen lock)
 
 #### Installation
 - Install dependencies
@@ -31,6 +29,7 @@
 - Change `assets/pfp.jpg`
 - Change `config.lua` based on your own system
 - Change the pinned apps for the launcher in `components/sidebar/modules/launcher.lua`
+- Change the location for weather in `daemons/weather.lua`
 
 #### Misc
-- Theme is Github Dark, you can change it in `themes.lua`
+- Theme is Material Dark(er), you can change it in `themes.lua`

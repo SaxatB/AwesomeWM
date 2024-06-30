@@ -9,15 +9,13 @@ local M = {}
 
 M.themes_path = gears.filesystem.get_configuration_dir()
 
-M.wallpaper = M.themes_path .. "backgrounds/ww.jpg"
+M.wallpaper = M.themes_path .. "backgrounds/pleasing.jpg"
 screen.connect_signal("request::desktop_decoration", function(s)
-  if M.wallpaper then
-    local wall = M.wallpaper
-    if type(wall) == "function" then
-      wall = wall(s)
-    end
-    gears.wallpaper.maximized(wall, s, true)
-  end
+    gears.wallpaper.maximized(M.wallpaper, s)
+end)
+
+screen.connect_signal("property::geometry", function(s)
+    gears.wallpaper.maximized(M.wallpaper, s)
 end)
 
 -- Converts the input to dpi

@@ -8,7 +8,7 @@ local gears = require("gears")
 
 local M = {}
 
-M.pinned = { "Nemo", "Chromium", "Vesktop", "Alacritty", "Spotify" }
+M.pinned = { "Nemo", "Chromium", "Alacritty", "Sublime Text", "Theme Changer" }
 M.num_visible = 3 -- Number of visible apps in launcher at one time
 
 function M.get_apps()
@@ -298,7 +298,7 @@ function M.new()
 			layout = wibox.layout.fixed.vertical,
 		})),
 		bg = beautiful.bg0,
-		forced_height = beautiful.dpi(250),
+		forced_height = beautiful.dpi(315),
 		layout = wibox.container.background,
 	})
 

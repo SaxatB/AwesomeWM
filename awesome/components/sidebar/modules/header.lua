@@ -97,12 +97,11 @@ M.widget = helpers.add_margin(wibox.widget({
                 layout = wibox.layout.flex.vertical
             },
             spacing = beautiful.margin[1],
-            forced_height = beautiful.icon_size[2],
+            forced_height = beautiful.icon_size[1],
             layout = wibox.layout.fixed.horizontal
         },
         nil,
         M.button_group,
-        expand = "none",
         layout = wibox.layout.align.horizontal
     }))
 

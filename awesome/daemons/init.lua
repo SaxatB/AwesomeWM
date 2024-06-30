@@ -2,11 +2,10 @@ req = {
 	"volume",
 	"brightness",
 	"battery",
+	"weather",
 	"playerctl",
 	"cpu",
 	"memory",
-	"temperature",
-	"hdd",
 	"uptime"
 }
 

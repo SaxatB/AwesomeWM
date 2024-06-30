@@ -83,42 +83,10 @@ function M.new()
         memory.text.markup = tostring(value).."%"
         memory.progressbar.value = value
     end)
-    local temperature = M.create_status_widget("", beautiful.red)
-    awesome.connect_signal("temperature::update", function(value)
-        if value < 40 then
-            temperature.widget.fg = beautiful.green
-            temperature.progressbar.colors[1] = beautiful.green
-        elseif value < 60 then
-            temperature.widget.fg = beautiful.blue
-            temperature.progressbar.colors[1] = beautiful.blue
-        else
-            temperature.widget.fg = beautiful.red
-            temperature.progressbar.colors[1] = beautiful.red
-        end
-        temperature.text.markup = tostring(value).."°C"
-        temperature.progressbar.value = value
-    end)
-    local storage = M.create_status_widget("", beautiful.purple)
-    awesome.connect_signal("hdd::update", function(value)
-        if value < 40 then
-            storage.widget.fg = beautiful.green
-            storage.progressbar.colors[1] = beautiful.green
-        elseif value < 60 then
-            storage.widget.fg = beautiful.blue
-            storage.progressbar.colors[1] = beautiful.blue
-        else
-            storage.widget.fg = beautiful.red
-            storage.progressbar.colors[1] = beautiful.red
-        end
-        storage.text.markup = tostring(value).."%"
-        storage.progressbar.value = value
-    end)
 
     M.widget = helpers.add_margin(wibox.widget({
         cpu.widget,
         memory.widget,
-	storage.widget,
-	temperature.widget,
         spacing = beautiful.margin[1],
         layout = wibox.layout.flex.horizontal
     }))
