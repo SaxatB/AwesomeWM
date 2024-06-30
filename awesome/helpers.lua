@@ -108,6 +108,17 @@ function M.add_hover_cursor(w, hover_cursor)
 	end)
 end
 
+-- Live Reload
+function M.live(w, properties)
+    local widget = w()
+
+	for property, arg in pairs(properties) do
+		widget[property] = beautiful[arg]
+	end
+        widget:emit_signal("widget::redraw_needed")
+    return widget
+end
+
 -- Adds margin to widget
 function M.add_margin(widget, h, v)
   h = h or beautiful.margin[0]

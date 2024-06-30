@@ -151,6 +151,11 @@ naughty.connect_signal("request::display", function(n)
     },
     widget = naughty.list.actions
   })
+  -- End notification after clicking on button
+  actions:buttons(gears.table.join(awful.button({}, 1, function()
+    n:destroy(naughty.notification_closed_reason.dismissed_by_user)
+  end)))
+
   local time = wibox.widget({
     markup = os.date("%I:%M %p"),
     halign = "right",

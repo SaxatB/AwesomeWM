@@ -9,7 +9,7 @@ local M = {}
 
 M.themes_path = gears.filesystem.get_configuration_dir()
 
-M.wallpaper = M.themes_path .. "backgrounds/pleasing.jpg"
+M.wallpaper = M.themes_path .. "backgrounds/ww.jpg"
 screen.connect_signal("request::desktop_decoration", function(s)
     gears.wallpaper.maximized(M.wallpaper, s)
 end)
