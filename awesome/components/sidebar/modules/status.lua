@@ -9,7 +9,7 @@ local M = {}
 function M.create_status_widget(icon, color)
     local icon_widget = wibox.widget({
         markup = icon,
-        font = beautiful.font_icon_medium,
+        font = beautiful.font_icon_large,
         valign = "center",
         halign = "center",
         widget = wibox.widget.textbox
@@ -19,10 +19,9 @@ function M.create_status_widget(icon, color)
         icon_widget,
         colors = { color },
         bg = beautiful.bg0,
-        thickness = beautiful.dpi(8),
-        forced_height = beautiful.dpi(64),
+        thickness = beautiful.dpi(6),
+        forced_height = beautiful.dpi(72),
         paddings = beautiful.dpi(2),
-        rounded_edge = true,
         min_value = 0,
         max_value = 100,
         widget = wibox.container.arcchart
@@ -65,7 +64,7 @@ function M.new()
         cpu.text.markup = tostring(value).."%"
         cpu.progressbar.value = value
     end)
-    local memory = M.create_status_widget("", beautiful.green)
+    local memory = M.create_status_widget("", beautiful.green)
     awesome.connect_signal("memory::update", function(value)
         if value < 25 then
             memory.widget.fg = beautiful.green
