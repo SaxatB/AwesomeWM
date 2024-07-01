@@ -1,3 +1,4 @@
+
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
@@ -12,7 +13,7 @@ function M.new()
     resize = true,
     halign = "center",
     valign = "center",
-    forced_height = beautiful.icon_size[2],
+    forced_height = beautiful.icon_size[3],
     forced_width = beautiful.icon_size[3],
     clip_shape = helpers.rrect(),
     widget = wibox.widget.imagebox
@@ -105,20 +106,24 @@ function M.new()
     M.prev,
     M.toggle,
     M.next,
-    layout = wibox.layout.flex.horizontal
+    expand = "outside",
+    layout = wibox.layout.align.horizontal
   }))
 
   M.text_group = helpers.add_margin(wibox.widget({
     M.artist,
     M.title,
-    layout = wibox.layout.flex.vertical
+    layout = wibox.layout.align.vertical
   }))
 
   M.widget = helpers.add_margin(helpers.add_bg1(helpers.add_margin(wibox.widget({
+	  {
     helpers.add_margin(M.art, beautiful.margin[1], beautiful.margin[1]),
-    M.text_group,
-    M.button_group,
+    helpers.add_margin(M.text_group, beautiful.margin[1], beautiful.margin[1]),
     layout = wibox.layout.align.horizontal
+    },
+    M.button_group,
+    layout = wibox.layout.align.vertical
   }))))
 
   M.widget:connect_signal("mouse::enter", function()

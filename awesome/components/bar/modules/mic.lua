@@ -2,7 +2,6 @@ local awful = require("awful")
 local wibox = require("wibox")
 local helpers = require("helpers")
 local beautiful = require("beautiful")
-local config = require("config")
 
 local function update(icon, background, tooltip, mute, vol)
     if mute then
@@ -42,7 +41,7 @@ local function create_widget()
 
     background:buttons({
         awful.button({}, 3, function()
-            awful.spawn.with_shell(config.apps.volume_manager)
+            awful.spawn.with_shell("pavucontrol --tab=4")
         end),
         awful.button({}, 1, function()
             awesome.emit_signal("microphone::mute")

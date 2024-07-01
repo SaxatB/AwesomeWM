@@ -6,7 +6,6 @@ local helpers = require("helpers")
 local header = require("components.sidebar.modules.header")
 local launcher = require("components.sidebar.modules.launcher")
 local media = require("components.sidebar.modules.media")
-local weather = require("components.sidebar.modules.weather")
 local status = require("components.sidebar.modules.status")
 local notifications = require("components.sidebar.modules.notifications")
 local M = {}
@@ -45,16 +44,14 @@ function M.new()
   M.header = header.new()
   M.launcher = launcher.new()
   M.media = media.new()
-  M.weather = weather.new()
   M.status = status.new()
   M.notifications = notifications.new()
 
   M.widget = helpers.add_margin(wibox.widget({
     M.header,
     M.launcher,
-    M.media,
     {
-    	M.weather,
+    	M.media,
     	M.status,
     	layout = wibox.layout.flex.horizontal
     },
@@ -69,7 +66,7 @@ function M.new()
     shape = helpers.rrect(),
     ontop = true,
     visible = false,
-    width = beautiful.dpi(510),
+    width = beautiful.dpi(540),
     height = awful.screen.focused().geometry.height - 4 * beautiful.useless_gap,
     border_color = beautiful.border_color_active,
     border_width = beautiful.border_width,
