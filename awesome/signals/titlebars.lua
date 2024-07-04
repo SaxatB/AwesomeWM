@@ -1,8 +1,13 @@
 local awful = require("awful")
 local wibox = require("wibox")
+local gears = require("gears")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
 local naughty = require("naughty")
+
+-- Timer for detecting double clicks
+local double_click_timer = nil
+local double_click_interval = 0.25
 
 -- Titlebars
 client.connect_signal("request::titlebars", function(c)
@@ -33,14 +38,14 @@ client.connect_signal("request::titlebars", function(c)
   end) })
 
   local minimize_icon = wibox.widget({
-	  {
-    valign = "center",
-    halign = "center",
-    markup = "",
-    forced_width = beautiful.icon_size[1],
-    forced_height = beautiful.icon_size[1],
-    font = beautiful.font_icon,
-    widget = wibox.widget.textbox
+    {
+      valign = "center",
+      halign = "center",
+      markup = "",
+      forced_width = beautiful.icon_size[1],
+      forced_height = beautiful.icon_size[1],
+      font = beautiful.font_icon,
+      widget = wibox.widget.textbox
     },
     awful.titlebar.widget.minimizebutton(c),
     widget = wibox.layout.stack
@@ -94,13 +99,31 @@ client.connect_signal("request::titlebars", function(c)
   }))
 
   local grab = helpers.add_margin(wibox.widget({
-	  {
-		  widget = wibox.widget.separator(),
-		  opacity = 0,
-	  },
-	buttons = buttons,  
-    	layout = wibox.layout.fixed.horizontal
+    {
+      widget = wibox.widget.separator(),
+      opacity = 0,
+    },
+    buttons = buttons,  
+    layout = wibox.layout.fixed.horizontal
   }))
+
+  -- Add single and double click detection to the grab widget
+  grab:buttons(gears.table.join(
+    awful.button({}, 1, function()
+      if double_click_timer then
+        double_click_timer:stop()
+        double_click_timer = nil
+        c.maximized = not c.maximized
+        c:raise()
+      else
+        double_click_timer = gears.timer.start_new(double_click_interval, function()
+          double_click_timer = nil
+          c:activate({ context = "titlebar", action = "mouse_move" })
+          return false
+        end)
+      end
+    end)
+  ))
 
   local titlebar_widget = helpers.add_margin(wibox.widget({
     left_widget,
@@ -143,7 +166,7 @@ client.connect_signal("property::maximized", function(c)
   if c.maximized then
     c.shape = nil
   else
-   c.shape = helpers.rrect()
+    c.shape = helpers.rrect()
   end
 end)
 
@@ -151,6 +174,6 @@ client.connect_signal("property::fullscreen", function(c)
   if c.fullscreen then
     c.shape = nil
   else
-   c.shape = helpers.rrect()
+    c.shape = helpers.rrect()
   end
 end)
