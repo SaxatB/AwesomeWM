@@ -55,7 +55,7 @@ function M.new()
     M.pfp = wibox.widget({
         image = gears.filesystem.get_configuration_dir() .. "assets/pfp.jpg",
         halign = "center",
-        valign = "center",
+        valign = "top",
         forced_height = beautiful.icon_size[2],
         forced_width = beautiful.icon_size[2],
         resize = true,
@@ -64,7 +64,7 @@ function M.new()
     })
 
     M.uptime_text = wibox.widget({
-        valign = "center",
+        valign = "top",
         halign = "left",
         widget = wibox.widget.textbox
     })
@@ -74,7 +74,7 @@ function M.new()
 
     M.name = wibox.widget({
         markup = "",
-        valign = "center",
+        valign = "top",
         halign = "left",
         widget = wibox.widget.textbox
     })

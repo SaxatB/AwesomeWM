@@ -116,7 +116,6 @@ client.connect_signal("request::titlebars", function(c)
   titlebar.widget = titlebar_widget
 
   c.shape = helpers.rrect()
-
   client.connect_signal("focus", function()
     if c.active then
       minimize_button.fg = beautiful.orange
@@ -130,7 +129,7 @@ client.connect_signal("request::titlebars", function(c)
   end)
 end)
 
-client.connect_signal("manage", function(c)
+client.connect_signal("request::manage", function(c)
   if not awesome.startup then
     awful.client.setslave(c)
   end
@@ -144,7 +143,7 @@ client.connect_signal("property::maximized", function(c)
   if c.maximized then
     c.shape = nil
   else
-    c.shape = helpers.rrect()
+   c.shape = helpers.rrect()
   end
 end)
 
@@ -152,6 +151,6 @@ client.connect_signal("property::fullscreen", function(c)
   if c.fullscreen then
     c.shape = nil
   else
-    c.shape = helpers.rrect()
+   c.shape = helpers.rrect()
   end
 end)

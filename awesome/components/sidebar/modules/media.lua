@@ -13,7 +13,7 @@ function M.new()
     resize = true,
     halign = "center",
     valign = "center",
-    forced_height = beautiful.icon_size[3],
+    forced_height = beautiful.icon_size[2],
     forced_width = beautiful.icon_size[3],
     clip_shape = helpers.rrect(),
     widget = wibox.widget.imagebox
@@ -113,7 +113,7 @@ function M.new()
   M.text_group = helpers.add_margin(wibox.widget({
     M.artist,
     M.title,
-    layout = wibox.layout.align.vertical
+    layout = wibox.layout.fixed.vertical
   }))
 
   M.widget = helpers.add_margin(helpers.add_bg1(helpers.add_margin(wibox.widget({

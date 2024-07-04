@@ -9,14 +9,13 @@ local M = {}
 
 M.themes_path = gears.filesystem.get_configuration_dir()
 
-M.wallpaper = M.themes_path .. "backgrounds/mountains_1.jpg"
-screen.connect_signal("request::desktop_decoration", function(s)
+M.wallpaper = M.themes_path .. "backgrounds/ww.jpg"
+local function set_wallpaper(s)
     gears.wallpaper.maximized(M.wallpaper, s)
-end)
+end
 
-screen.connect_signal("property::geometry", function(s)
-    gears.wallpaper.maximized(M.wallpaper, s)
-end)
+screen.connect_signal("request::desktop_decoration", set_wallpaper)
+screen.connect_signal("property::geometry", set_wallpaper)
 
 -- Converts the input to dpi
 function M.dpi(i)
@@ -29,7 +28,7 @@ M.font_large = "RobotoCondensed 64"
 M.font_icon = "Material-Design-Iconic-Font 14"
 M.font_icon_medium = "Material-Design-Iconic-Font 19"
 M.font_icon_large = "Material-Design-Iconic-Font 24"
-M.radius = M.dpi(8)
+M.radius = M.dpi(6)
 
 M.margin = {}
 M.margin[0] = M.dpi(4)
@@ -73,7 +72,7 @@ M.fg_minimize = M.fg2
 
 M.border_color_normal = M.bg0
 M.border_color_active = M.bg1
-M.border_width = dpi(2)
+M.border_width = dpi(0)
 
 -- Configs
 M.bar_width = M.dpi(42)

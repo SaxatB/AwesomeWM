@@ -1,4 +1,5 @@
 local awful = require("awful")
+local beautiful = require("beautiful")
 local helpers = require("helpers")
 
 local function create_widget(s)
@@ -21,7 +22,7 @@ local function create_widget(s)
 		},
 	})
 
-	local widget = helpers.add_margin(helpers.add_margin(layout_box))
+	local widget = helpers.add_margin(layout_box, beautiful.margin[1], beautiful.margin[0])
 	return widget
 end
 return create_widget
