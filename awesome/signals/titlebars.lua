@@ -118,7 +118,6 @@ client.connect_signal("request::titlebars", function(c)
       else
         double_click_timer = gears.timer.start_new(double_click_interval, function()
           double_click_timer = nil
-          c:activate({ context = "titlebar", action = "mouse_move" })
           return false
         end)
       end
