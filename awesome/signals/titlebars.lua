@@ -38,7 +38,6 @@ client.connect_signal("request::titlebars", function(c)
   end) })
 
   local minimize_icon = wibox.widget({
-    {
       valign = "center",
       halign = "center",
       markup = "",
@@ -46,14 +45,14 @@ client.connect_signal("request::titlebars", function(c)
       forced_height = beautiful.icon_size[1],
       font = beautiful.font_icon,
       widget = wibox.widget.textbox
-    },
-    awful.titlebar.widget.minimizebutton(c),
-    widget = wibox.layout.stack
   })
 
   local minimize_button = helpers.add_bg(minimize_icon)
-  -- Disable tooltip
-  awful.titlebar.enable_tooltip = false
+  minimize_button:buttons({ awful.button({}, 1, function()
+	  gears.timer.delayed_call(function()
+		  c.minimized = true
+	  end)
+  end) })
 
   local maximize_icon = wibox.widget({
     valign = "center",
@@ -94,8 +93,7 @@ client.connect_signal("request::titlebars", function(c)
     minimize_button,
     maximize_button,
     close_button,
-    spacing = beautiful.margin[0],
-    layout = wibox.layout.fixed.horizontal
+    layout = wibox.layout.align.horizontal
   }))
 
   local grab = helpers.add_margin(wibox.widget({
@@ -107,8 +105,15 @@ client.connect_signal("request::titlebars", function(c)
     layout = wibox.layout.fixed.horizontal
   }))
 
+  local titlebar_widget = helpers.add_margin(wibox.widget({
+    left_widget,
+    grab,
+    right_widget,
+    layout = wibox.layout.align.horizontal
+  }))
+
   -- Add single and double click detection to the grab widget
-  grab:buttons(gears.table.join(
+  titlebar_widget:buttons(gears.table.join(
     awful.button({}, 1, function()
       if double_click_timer then
         double_click_timer:stop()
@@ -118,18 +123,12 @@ client.connect_signal("request::titlebars", function(c)
       else
         double_click_timer = gears.timer.start_new(double_click_interval, function()
           double_click_timer = nil
-          return false
+           return false
         end)
       end
     end)
   ))
 
-  local titlebar_widget = helpers.add_margin(wibox.widget({
-    left_widget,
-    grab,
-    right_widget,
-    layout = wibox.layout.align.horizontal
-  }))
 
   local titlebar = awful.titlebar(c, {
     size = beautiful.titlebar_height
