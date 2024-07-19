@@ -18,11 +18,11 @@ client.connect_signal("request::titlebars", function(c)
     })
     c.floating = true
   end), awful.button({}, 3, function()
+    c.floating = true
     c:activate({
       context = "titlebar",
       action = "mouse_resize"
     })
-    c.floating = true
   end) }
 
   local close_icon = wibox.widget({
