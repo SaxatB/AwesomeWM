@@ -147,6 +147,14 @@ function M.new()
 
     M.background.image = gears.surface.load_uncached(beautiful.wallpaper)
 
+    awful.spawn.easy_async("fprintd-verify", function(out)
+	    if out:match("verify%-match") then
+		M.stop()
+	    elseif out:match("verify%-no%-match") then
+		M.input = ""
+	    end
+    end)
+
     screen.connect_signal("list", function()
         if M.visible then
             for s, wibox in pairs(M.wiboxes) do
