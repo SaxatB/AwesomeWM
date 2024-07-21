@@ -8,20 +8,20 @@ local naughty = require("naughty")
 -- Titlebars
 client.connect_signal("request::titlebars", function(c)
 local buttons = { awful.button({}, 1, function()
-	c.floating = true
-      if c.maximized then
-        c.maximized = false
-      end
+   local clients = awful.screen.focused().clients
+   if #clients == 1 then
+          c.floating = true
+   end
       c:activate({
         context = "titlebar",
         action = "mouse_move"
       })
       end), 
     awful.button({}, 3, function()
-        c.floating = true
-      if c.maximized then
-        c.maximized = false
-      end
+   local clients = awful.screen.focused().clients
+   if #clients == 1 then
+          c.floating = true
+   end
       c:activate({
         context = "titlebar",
         action = "mouse_resize"
