@@ -12,10 +12,6 @@ local double_click_interval = 0.20
 -- Titlebars
 client.connect_signal("request::titlebars", function(c)
 local buttons = { awful.button({}, 1, function()
-   local clients = awful.screen.focused().clients
-   if #clients == 1 then
-          c.floating = true
-   end
       c:activate({
         context = "titlebar",
         action = "mouse_move"
