@@ -5,6 +5,10 @@ local beautiful = require("beautiful")
 local helpers = require("helpers")
 local naughty = require("naughty")
 
+-- Timer for detecting double clicks
+local double_click_timer = nil
+local double_click_interval = 0.20
+
 -- Titlebars
 client.connect_signal("request::titlebars", function(c)
 local buttons = { awful.button({}, 1, function()
@@ -108,6 +112,24 @@ local buttons = { awful.button({}, 1, function()
     buttons = buttons,  
     layout = wibox.layout.fixed.horizontal
   }))
+
+  -- Add single and double click detection to the grab widget
+  grab:buttons(gears.table.join(
+    awful.button({}, 1, function()
+      if double_click_timer then
+        double_click_timer:stop()
+        double_click_timer = nil
+        c.maximized = not c.maximized
+        c:raise()
+      else
+        double_click_timer = gears.timer.start_new(double_click_interval, function()
+          double_click_timer = nil
+          c:activate({ context = "titlebar", action = "mouse_move" })
+          return false
+        end)
+      end
+    end)
+  ))
 
   local titlebar_widget = helpers.add_margin(wibox.widget({
     left_widget,
